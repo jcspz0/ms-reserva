@@ -1,0 +1,20 @@
+[
+    {
+        "vueloId": "06006195-b331-4ef9-bc2c-4dc3a028a46f",
+        "nroVuelo": 1,
+        "destino": "Santa",
+        "cantidadAsientoDisponible": 10
+    },
+    {
+        "vueloId": "0a487617-4835-4435-989b-f6d8d5dcf1ac",
+        "nroVuelo": 2,
+        "destino": "Santa",
+        "cantidadAsientoDisponible": 10
+    },
+    {
+        "vueloId": "1e54196c-76e6-4c5e-a09d-7f898cdc4431",
+        "nroVuelo": 3,
+        "destino": "La Paz",
+        "cantidadAsientoDisponible": 10
+    }
+  ]

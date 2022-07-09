@@ -1,0 +1,41 @@
+<router-outlet></router-outlet>
+
+<h2>Buscar Vuelos disponibles</h2>
+
+<form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Destino</mat-label>
+                <input matInput id="destino" type="text" formControlName="destino">
+        </mat-form-field>
+    </div>
+
+
+    <button mat-raised-button mat-button-base mat-primary color="primary" class="button" type="submit" id="botonBuscarVuelo">Buscar</button>
+
+</form>
+
+<h3 *ngIf="vueloSeleccionado.vueloId" >Vuelo seleccionado: {{vueloSeleccionado.vueloId}} con destino a {{vueloSeleccionado.destino}}</h3>
+
+
+<table border="2" id="tablaVuelos">
+    <thead>
+        <tr>
+            <th>vueloid</th>
+            <th>nrovuelo</th>
+            <th>destino</th>
+            <th>cantidadasientodisponible</th>
+            <th>accion</th>
+        </tr>
+    </thead>
+    <tbody id="tbodyVuelos">
+        <tr *ngFor="let vuelo of vuelos | async ">
+            <td id="tablavueloid">{{vuelo.vueloId}}</td>
+            <td>{{vuelo.nroVuelo}}</td>
+            <td>{{vuelo.destino}}</td>
+            <td id="tablaasientos">{{vuelo.cantidadAsientoDisponible}}</td>
+            <td><button mat-raised-button mat-button-base mat-primary color="primary" id="tablabotonseleccionar" (click)="onSeleccionar(vuelo)">Seleccionar</button></td>
+        </tr>
+    </tbody>
+</table>

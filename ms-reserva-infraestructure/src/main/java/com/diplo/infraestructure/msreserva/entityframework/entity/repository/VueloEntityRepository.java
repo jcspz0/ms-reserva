@@ -1,0 +1,21 @@
+package com.diplo.infraestructure.msreserva.entityframework.entity.repository;
+
+import java.util.List;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.diplo.infraestructure.msreserva.entityframework.entity.ReservaEntity;
+import com.diplo.infraestructure.msreserva.entityframework.entity.VueloEntity;
+
+
+@Repository
+public interface VueloEntityRepository extends CrudRepository<VueloEntity, String>{
+	
+	@Query(value = "SELECT * FROM vuelo WHERE destino = ?1", nativeQuery = true)
+	List<VueloEntity> GetVuelosByDestino(String destino);
+
+}

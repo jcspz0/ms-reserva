@@ -1,0 +1,18 @@
+[
+    {
+        "segundoApellido": "pereza",
+        "tipoDoc": 1,
+        "nombre": "juan",
+        "nroDoc": 10,
+        "primerApellido": "perez",
+        "pasajeroId": "0900dc8b-aa40-4150-b1d3-6e7fe0d6f2d9"
+    },
+    {
+        "segundoApellido": "pereza",
+        "tipoDoc": 1,
+        "nombre": "juan",
+        "nroDoc": 10,
+        "primerApellido": "perez",
+        "pasajeroId": "0900dc8b-aa40-4150-b1d3-6e7fe0d6f2d9"
+    }
+]

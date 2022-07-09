@@ -1,0 +1,53 @@
+services:
+  front:
+    image: jcspz0/ms-reserva-web:1.0
+    container_name: ms-reserva-web
+    build:
+      context: .
+      dockerfile: ./Dockerfile-front
+    ports:
+      - 5000:5000
+    environment:
+      - API_HOST=http://localhost
+      - API_PORT=8080
+    depends_on:
+      - backend
+  backend:
+    image: jcspz0/ms-reserva-service:1.0
+    container_name: ms-reserva-service
+    build:
+      context: .
+      dockerfile: ./Dockerfile-back
+    ports:
+      - 8080:8080
+    restart: always
+    environment:
+      - ENV_MYSQL_HOST=ms-reserva-db 
+      - ENV_MYSQL_PORT=3306 
+      - ENV_MYSQL_DB=jcdb 
+      - ENV_MYSQL_USER=jcspz0 
+      - ENV_MYSQL_PASS=juancarlos 
+      - ENV_APP_PORT=8080 
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql:8.0.29
+    container_name: ms-reserva-db
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=passroot
+      - MYSQL_DATABASE=jcdb
+      - MYSQL_USER=jcspz0
+      - MYSQL_PASSWORD=juancarlos 
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+            test: ["CMD-SHELL", "mysqladmin --user=$${MYSQL_USER} --password=$${MYSQL_PASSWORD} ping"]
+            interval: 10s
+            timeout: 2s
+            retries: 1000
+volumes:
+  mysql-data:
+
