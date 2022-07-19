@@ -1,16 +1,5 @@
 package com.diplo.webapi.msreserva;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
-
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.mediator.IMediator;
 import com.diplo.application.msreserva.mediator.Mediator;
@@ -28,21 +17,24 @@ import com.diplo.msreserva.factory.ReservaFactory;
 import com.diplo.msreserva.model.reserva.Reserva;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IUnitOfWork;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
 
 //@EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan({"com.diplo", "org.springframework.data.repository.CrudRepository"})
-
+@ComponentScan(
+	{ "com.diplo", "org.springframework.data.repository.CrudRepository" }
+)
 public class MsReservaWebapiApplication extends SpringBootServletInitializer {
-	
 
-	
 	public static void main(String[] args) {
 		SpringApplication.run(MsReservaWebapiApplication.class, args);
-		
 	}
-	
-
-	
-
 }

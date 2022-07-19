@@ -1,14 +1,5 @@
 package com.diplo.infraestructure.msreserva.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import com.diplo.application.msreserva.mediator.IMediator;
 import com.diplo.application.msreserva.mediator.Mediator;
 import com.diplo.application.msreserva.service.IMediatorApplicationService;
@@ -29,38 +20,50 @@ import com.diplo.msreserva.repository.IUnitOfWork;
 import com.diplo.msreserva.repository.IVueloRepository;
 import com.diplo.sharekernel.core.IApplicationService;
 import com.diplo.sharekernel.core.IInfraestructureService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Service
-public class MsReservaInfraestructureService  implements IInfraestructureService{
+public class MsReservaInfraestructureService
+	implements IInfraestructureService {
 
 	@Autowired
 	MsReservaApplicationService service;
+
 	@Autowired
 	IReservaRepository _reservaRepository;
+
 	@Autowired
 	IVueloRepository _vueloRepository;
-	
+
 	@Autowired
 	IPasajeroRepository _pasajeroRepository;
-	
+
 	@Autowired
 	IUnitOfWork _unitOfWork;
-	
+
 	//-----
-	
-	
+
 	@Override
 	public void AddInfraestructure(IApplicationService appService) {
 		service = (MsReservaApplicationService) appService;
 		service.AddApplication();
 		//_reservaRepository = new MemoryReservaRepository(new MemoryDatabase(new ArrayList<Reserva>()));
 		//this._reservaRepository = _reservaRepository;
-		//_unitOfWork = new UnitOfWork();	
+		//_unitOfWork = new UnitOfWork();
 	}
 
-	public MsReservaInfraestructureService(IMediatorApplicationService service, 
-			IReservaRepository _reservaRepository, IVueloRepository _vueloRepository,
-			IPasajeroRepository _pasajeroRepository , IUnitOfWork _unitOfWork) {
+	public MsReservaInfraestructureService(
+		IMediatorApplicationService service,
+		IReservaRepository _reservaRepository,
+		IVueloRepository _vueloRepository,
+		IPasajeroRepository _pasajeroRepository,
+		IUnitOfWork _unitOfWork
+	) {
 		this.service = (MsReservaApplicationService) service;
 		this._reservaRepository = _reservaRepository;
 		this._vueloRepository = _vueloRepository;
@@ -78,7 +81,7 @@ public class MsReservaInfraestructureService  implements IInfraestructureService
 	}
 
 	public void setService(MsReservaApplicationService service) {
-		this.service =  service;
+		this.service = service;
 	}
 
 	public IReservaRepository getReservaRepository() {
@@ -112,7 +115,4 @@ public class MsReservaInfraestructureService  implements IInfraestructureService
 	public void setPasajeroRepository(IPasajeroRepository _pasajeroRepository) {
 		this._pasajeroRepository = _pasajeroRepository;
 	}
-	
-	
-
 }

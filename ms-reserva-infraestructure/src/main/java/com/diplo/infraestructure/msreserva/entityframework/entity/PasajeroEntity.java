@@ -1,7 +1,9 @@
 package com.diplo.infraestructure.msreserva.entityframework.entity;
 
+import com.diplo.msreserva.model.pasajero.Pasajero;
+import com.diplo.msreserva.model.reserva.Reserva;
+import com.diplo.msreserva.model.vuelo.Vuelo;
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,31 +16,29 @@ import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 
-import com.diplo.msreserva.model.pasajero.Pasajero;
-import com.diplo.msreserva.model.reserva.Reserva;
-import com.diplo.msreserva.model.vuelo.Vuelo;
-
 @Entity
 @Table(name = "pasajero")
 public class PasajeroEntity {
+
 	@Id
 	private String PasajeroId;
+
 	@Column(name = "nrodoc")
 	private int NroDoc;
+
 	@Column(name = "tipodoc")
 	private int TipoDoc;
+
 	private String Nombre;
 	private String PrimerApellido;
 	private String SegundoApellido;
 
-	public PasajeroEntity() {
-	}
+	public PasajeroEntity() {}
 
 	public PasajeroEntity(Pasajero aux) {
 		super();
@@ -97,5 +97,4 @@ public class PasajeroEntity {
 	public void setSegundoApellido(String segundoApellido) {
 		SegundoApellido = segundoApellido;
 	}
-
 }

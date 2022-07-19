@@ -1,13 +1,11 @@
 package com.diplo.application.msreserva.dto.reserva;
 
+import com.diplo.msreserva.model.reserva.Reserva;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.diplo.msreserva.model.reserva.Reserva;
-
-
 public class ReservaDTO {
-	
+
 	private String ReservaId;
 	private String NroReserva;
 	private String PasajeroId;
@@ -16,12 +14,21 @@ public class ReservaDTO {
 	private int CantidadPasajero;
 	private String Hora;
 	private String Estado;
-	
+
 	public ReservaDTO() {
 		super();
 	}
 
-	public ReservaDTO(String id, String nroReserva, String pasajeroId, String vueloId, double precio, int cantidadPasajero, String hora, String estado) {
+	public ReservaDTO(
+		String id,
+		String nroReserva,
+		String pasajeroId,
+		String vueloId,
+		double precio,
+		int cantidadPasajero,
+		String hora,
+		String estado
+	) {
 		super();
 		Hora = hora;
 		ReservaId = id;
@@ -32,8 +39,16 @@ public class ReservaDTO {
 		CantidadPasajero = cantidadPasajero;
 		Estado = estado;
 	}
-	
-	public ReservaDTO(String nroReserva, String pasajeroId, String vueloId, double precio, int cantidadPasajero, String hora, String estado) {
+
+	public ReservaDTO(
+		String nroReserva,
+		String pasajeroId,
+		String vueloId,
+		double precio,
+		int cantidadPasajero,
+		String hora,
+		String estado
+	) {
 		super();
 		Hora = hora;
 		ReservaId = "";
@@ -43,7 +58,7 @@ public class ReservaDTO {
 		CantidadPasajero = cantidadPasajero;
 		Estado = estado;
 	}
-	
+
 	public ReservaDTO(Reserva aux) {
 		Hora = aux.getHora().getHora().toString();
 		ReservaId = aux.getId().toString();
@@ -118,5 +133,4 @@ public class ReservaDTO {
 	public void setEstado(String estado) {
 		Estado = estado;
 	}
-	
 }

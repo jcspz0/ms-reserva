@@ -1,15 +1,5 @@
 package com.diplo.infraestructure.msreserva;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-
 import com.diplo.application.msreserva.ReservaRepositoryImplTST;
 import com.diplo.application.msreserva.UnitOfWorkImplTST;
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
@@ -43,33 +33,39 @@ import com.diplo.msreserva.model.vuelo.Vuelo;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IUnitOfWork;
 import com.diplo.msreserva.repository.IVueloRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.diplo"})
+@ComponentScan({ "com.diplo" })
 public class MsReservaInfraestructureApplication implements CommandLineRunner {
 
 	//@Autowired
 	//DbReservaRepository reservaEntityRepository;
-	
+
 	@Autowired
 	DbVueloRepository vueloEntityRepository;
-	
+
 	@Autowired
 	MsReservaInfraestructureService _serviceInfra;
-	
+
 	@Autowired
 	UnitOfWork _unitOfWork;
-	
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(MsReservaInfraestructureApplication.class, args);
-		
 	}
-	
+
 	@Override
-    public void run(String... strings) throws Exception {
-	//MsReservaInfraestructureService _serviceInfra = new MsReservaInfraestructureService(new MsReservaApplicationService(),reservaEntityRepository, new UnitOfWork());
-	/*	
+	public void run(String... strings) throws Exception {
+		//MsReservaInfraestructureService _serviceInfra = new MsReservaInfraestructureService(new MsReservaApplicationService(),reservaEntityRepository, new UnitOfWork());
+		/*	
 		_serviceInfra.setReservaRepository(reservaEntityRepository);
 		_serviceInfra.set_unitOfWork(_unitOfWork);
 		_serviceInfra.AddInfraestructure(new MsReservaApplicationService());
@@ -104,9 +100,9 @@ public class MsReservaInfraestructureApplication implements CommandLineRunner {
 		//Update reserva
 		
 	*/
-		
+
 		///-----------crear vuelo
-	/*	
+		/*	
 		_serviceInfra.set_unitOfWork(_unitOfWork);
 		_serviceInfra.AddInfraestructure(new MsReservaApplicationService());
 		
@@ -137,6 +133,5 @@ public class MsReservaInfraestructureApplication implements CommandLineRunner {
 		
 		//----------------
 		*/
-    }
-
+	}
 }

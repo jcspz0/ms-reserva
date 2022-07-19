@@ -10,5 +10,4 @@ public class MsShareKernelApplication {
 		SpringApplication.run(MsShareKernelApplication.class, args);
 		System.out.println("Prueba");
 	}
-
 }

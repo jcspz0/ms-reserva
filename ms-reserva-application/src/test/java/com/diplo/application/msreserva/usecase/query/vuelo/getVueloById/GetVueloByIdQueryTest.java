@@ -3,7 +3,6 @@ package com.diplo.application.msreserva.usecase.query.vuelo.getVueloById;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.UUID;
-
 import org.junit.jupiter.api.Test;
 
 class GetVueloByIdQueryTest {
@@ -14,8 +13,7 @@ class GetVueloByIdQueryTest {
 		GetVueloByIdQuery getVueloByIdQuery = new GetVueloByIdQuery();
 		getVueloByIdQuery.setId(id);
 		getVueloByIdQuery = new GetVueloByIdQuery(id);
-		
+
 		assertEquals(id, getVueloByIdQuery.getId());
 	}
-
 }

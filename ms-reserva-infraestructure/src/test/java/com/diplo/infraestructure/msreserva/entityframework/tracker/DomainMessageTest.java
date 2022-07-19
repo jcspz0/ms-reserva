@@ -14,5 +14,4 @@ class DomainMessageTest {
 		assertEquals(message, domainMessage.getMessage());
 		assertEquals(action, domainMessage.getAction());
 	}
-
 }

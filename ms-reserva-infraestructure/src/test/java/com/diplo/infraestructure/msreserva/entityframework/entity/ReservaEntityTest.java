@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 import org.junit.jupiter.api.Test;
 
 class ReservaEntityTest {
@@ -28,7 +27,7 @@ class ReservaEntityTest {
 		reservaEntity.setPrecio(Precio);
 		reservaEntity.setReservaId(ReservaId);
 		reservaEntity.setVueloId(VueloId);
-		
+
 		assertEquals(ReservaId, reservaEntity.getReservaId());
 		assertEquals(nroReserva, reservaEntity.getNroReserva());
 		assertEquals(PasajeroId, reservaEntity.getPasajeroId());
@@ -37,7 +36,5 @@ class ReservaEntityTest {
 		assertEquals(CantidadPasajero, reservaEntity.getCantidadPasajero());
 		assertEquals(Hora, reservaEntity.getHora());
 		assertEquals(Estado, reservaEntity.getEstado());
-		
 	}
-
 }

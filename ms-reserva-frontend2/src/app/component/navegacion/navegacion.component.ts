@@ -7,16 +7,15 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-navegacion',
   templateUrl: './navegacion.component.html',
-  styleUrls: ['./navegacion.component.css']
+  styleUrls: ['./navegacion.component.css'],
 })
 export class NavegacionComponent {
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result) => result.matches),
       shareReplay()
     );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
-
 }

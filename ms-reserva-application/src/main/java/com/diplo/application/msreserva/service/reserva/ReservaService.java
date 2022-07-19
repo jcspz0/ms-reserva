@@ -8,11 +8,8 @@ public class ReservaService implements IReservaService {
 
 	@Override
 	public Future<String> GenerarNroReservaAsync() {
-		return CompletableFuture.supplyAsync(()-> {return UUID.randomUUID().toString();});
+		return CompletableFuture.supplyAsync(() -> {
+			return UUID.randomUUID().toString();
+		});
 	}
-	
-	
-
-	
-
 }

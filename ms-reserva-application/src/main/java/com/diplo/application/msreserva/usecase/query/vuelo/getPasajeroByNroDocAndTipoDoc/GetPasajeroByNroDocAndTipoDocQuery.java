@@ -1,20 +1,18 @@
 package com.diplo.application.msreserva.usecase.query.vuelo.getPasajeroByNroDocAndTipoDoc;
 
-import java.util.UUID;
-
 import com.diplo.application.msreserva.dto.pasajero.PasajeroDTO;
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
 import com.diplo.application.msreserva.mediator.request.IRequest;
+import java.util.UUID;
 
-public class GetPasajeroByNroDocAndTipoDocQuery implements IRequest<PasajeroDTO> {
+public class GetPasajeroByNroDocAndTipoDocQuery
+	implements IRequest<PasajeroDTO> {
 
 	private int NroDoc;
 	private int TipoDoc;
 
-	public GetPasajeroByNroDocAndTipoDocQuery() {
-
-	}
+	public GetPasajeroByNroDocAndTipoDocQuery() {}
 
 	public int getNroDoc() {
 		return NroDoc;
@@ -37,5 +35,4 @@ public class GetPasajeroByNroDocAndTipoDocQuery implements IRequest<PasajeroDTO>
 		NroDoc = nroDoc;
 		TipoDoc = tipoDoc;
 	}
-
 }
