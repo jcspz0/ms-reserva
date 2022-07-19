@@ -2,12 +2,10 @@ package com.diplo.infraestructure.msreserva.memoryrepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.diplo.msreserva.model.reserva.Reserva;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
-
-import com.diplo.msreserva.model.reserva.Reserva;
 
 class MemoryDatabaseTest {
 
@@ -17,5 +15,4 @@ class MemoryDatabaseTest {
 		MemoryDatabase memoryDatabase = new MemoryDatabase(lista);
 		assertEquals(lista, memoryDatabase.get_reservas());
 	}
-
 }

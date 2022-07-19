@@ -22,12 +22,12 @@ services:
       - 8080:8080
     restart: always
     environment:
-      - ENV_MYSQL_HOST=ms-reserva-db 
-      - ENV_MYSQL_PORT=3306 
-      - ENV_MYSQL_DB=jcdb 
-      - ENV_MYSQL_USER=jcspz0 
-      - ENV_MYSQL_PASS=juancarlos 
-      - ENV_APP_PORT=8080 
+      - ENV_MYSQL_HOST=ms-reserva-db
+      - ENV_MYSQL_PORT=3306
+      - ENV_MYSQL_DB=jcdb
+      - ENV_MYSQL_USER=jcspz0
+      - ENV_MYSQL_PASS=juancarlos
+      - ENV_APP_PORT=8080
     depends_on:
       db:
         condition: service_healthy
@@ -40,14 +40,17 @@ services:
       - MYSQL_ROOT_PASSWORD=passroot
       - MYSQL_DATABASE=jcdb
       - MYSQL_USER=jcspz0
-      - MYSQL_PASSWORD=juancarlos 
+      - MYSQL_PASSWORD=juancarlos
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:
-            test: ["CMD-SHELL", "mysqladmin --user=$${MYSQL_USER} --password=$${MYSQL_PASSWORD} ping"]
-            interval: 10s
-            timeout: 2s
-            retries: 1000
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin --user=$${MYSQL_USER} --password=$${MYSQL_PASSWORD} ping",
+        ]
+      interval: 10s
+      timeout: 2s
+      retries: 1000
 volumes:
   mysql-data:
-

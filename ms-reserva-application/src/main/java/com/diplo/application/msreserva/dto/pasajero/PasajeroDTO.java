@@ -1,11 +1,10 @@
 package com.diplo.application.msreserva.dto.pasajero;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 import com.diplo.msreserva.model.pasajero.Pasajero;
 import com.diplo.msreserva.model.reserva.Reserva;
 import com.diplo.msreserva.model.vuelo.Vuelo;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class PasajeroDTO {
 
@@ -20,7 +19,13 @@ public class PasajeroDTO {
 		super();
 	}
 
-	public PasajeroDTO(int nroDoc, int tipoDoc, String nombre, String primerApellido, String segundoApellido) {
+	public PasajeroDTO(
+		int nroDoc,
+		int tipoDoc,
+		String nombre,
+		String primerApellido,
+		String segundoApellido
+	) {
 		super();
 		NroDoc = nroDoc;
 		TipoDoc = tipoDoc;
@@ -28,8 +33,15 @@ public class PasajeroDTO {
 		PrimerApellido = primerApellido;
 		SegundoApellido = segundoApellido;
 	}
-	
-	public PasajeroDTO(String pasajeroId, int nroDoc, int tipoDoc, String nombre, String primerApellido, String segundoApellido) {
+
+	public PasajeroDTO(
+		String pasajeroId,
+		int nroDoc,
+		int tipoDoc,
+		String nombre,
+		String primerApellido,
+		String segundoApellido
+	) {
 		super();
 		PasajeroId = pasajeroId;
 		NroDoc = nroDoc;
@@ -95,6 +107,4 @@ public class PasajeroDTO {
 	public void setPasajeroId(String pasajeroId) {
 		PasajeroId = pasajeroId;
 	}
-	
-
 }

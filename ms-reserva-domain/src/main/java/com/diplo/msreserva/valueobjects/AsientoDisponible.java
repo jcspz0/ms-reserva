@@ -12,12 +12,9 @@ public final class AsientoDisponible extends ValueObject {
 
 	public AsientoDisponible(int disponibilidad) throws Exception {
 		super();
-		if(disponibilidad < 0) {
+		if (disponibilidad < 0) {
 			throw new Exception("La disponibilidad no puede ser negativa");
 		}
 		Disponibilidad = disponibilidad;
 	}
-	
-	
-	
 }

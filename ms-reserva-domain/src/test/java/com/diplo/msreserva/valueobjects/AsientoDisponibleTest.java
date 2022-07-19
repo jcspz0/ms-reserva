@@ -8,24 +8,25 @@ class AsientoDisponibleTest {
 
 	@Test
 	void evitarCrearAsientoDisponibleNegativo() {
-		
-		Exception exception = assertThrows(Exception.class, () -> {
-			new AsientoDisponible(-1);
-	    });
+		Exception exception = assertThrows(
+			Exception.class,
+			() -> {
+				new AsientoDisponible(-1);
+			}
+		);
 
-	    String expectedMessage = "La disponibilidad no puede ser negativa";
-	    String actualMessage = exception.getMessage();
+		String expectedMessage = "La disponibilidad no puede ser negativa";
+		String actualMessage = exception.getMessage();
 
-	    assertTrue(actualMessage.contains(expectedMessage));
+		assertTrue(actualMessage.contains(expectedMessage));
 	}
-	
+
 	@Test
 	void CrearAsientoDisponible() throws Exception {
-		int cant=1;
-		
+		int cant = 1;
+
 		AsientoDisponible resultado = new AsientoDisponible(cant);
- 
+
 		assertEquals(cant, resultado.getDisponibilidad());
 	}
-
 }

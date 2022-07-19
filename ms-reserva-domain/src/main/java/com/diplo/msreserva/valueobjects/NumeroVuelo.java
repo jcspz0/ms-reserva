@@ -2,7 +2,7 @@ package com.diplo.msreserva.valueobjects;
 
 import com.diplo.sharekernel.core.ValueObject;
 
-public final class NumeroVuelo extends ValueObject{
+public final class NumeroVuelo extends ValueObject {
 
 	private final int Numero;
 
@@ -14,7 +14,4 @@ public final class NumeroVuelo extends ValueObject{
 		super();
 		Numero = numero;
 	}
-	
-	
-	
 }
