@@ -7,7 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MsReservaInfraestructureApplicationTests {
 
 	@Test
-	void contextLoads() {
-	}
-
+	void contextLoads() {}
 }

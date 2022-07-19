@@ -3,51 +3,45 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { filter, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Reserva } from './reserva';
-import { cloneDeep } from "lodash";
+import { cloneDeep } from 'lodash';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReservaService {
-
-  reserva: Reserva
+  reserva: Reserva;
   satisfactorio: boolean;
 
-  constructor(
-    private http: HttpClient
-  ) { 
+  constructor(private http: HttpClient) {
     this.reserva = new Reserva();
     this.satisfactorio = false;
   }
 
-  getReserva(){
+  getReserva() {
     return this.reserva;
   }
 
-  setReserva(reserva: Reserva){
+  setReserva(reserva: Reserva) {
     this.reserva = reserva;
   }
 
-  crearReservaBackEnd(reservaACrear: Reserva){
-    const url = environment.apiHost+':'+environment.apiPort+'/reserva/crear';
+  crearReservaBackEnd(reservaACrear: Reserva) {
+    const url =
+      environment.apiHost + ':' + environment.apiPort + '/reserva/crear';
     console.log(reservaACrear);
-    let response = this.http.post<Reserva>(
-      url,
-      reservaACrear
-      ).subscribe(
-        data => {
-          alert("reserva creada correctamente con el id:" + data.reservaId);
-          this.satisfactorio = true;
-        },
-        error => {
-          alert("Ocurrio un error al tratar de crear la reserva");
-          console.log(error);
-          this.satisfactorio = false;
-        }
-      );
-      //return JSON.parse(JSON.stringify(response));
-      return cloneDeep(response);
+    let response = this.http.post<Reserva>(url, reservaACrear).subscribe(
+      (data) => {
+        alert('reserva creada correctamente con el id:' + data.reservaId);
+        this.satisfactorio = true;
+      },
+      (error) => {
+        alert('Ocurrio un error al tratar de crear la reserva');
+        console.log(error);
+        this.satisfactorio = false;
+      }
+    );
+    //return JSON.parse(JSON.stringify(response));
+    return cloneDeep(response);
   }
-
 }

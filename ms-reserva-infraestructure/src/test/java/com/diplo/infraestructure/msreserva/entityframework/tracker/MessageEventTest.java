@@ -11,9 +11,8 @@ class MessageEventTest {
 		Object message = new Object();
 		String accion = "accion";
 		MessageEvent messageEvent = new MessageEvent(message, accion);
-		
+
 		assertEquals(message, messageEvent.getMessage());
 		assertEquals(accion, messageEvent.getAction());
 	}
-
 }

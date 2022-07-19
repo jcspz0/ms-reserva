@@ -4,11 +4,9 @@
 
 export const environment = {
   production: false,
-  apiHost: window["env"]["apiHost"] || "http://localhost",
-  apiPort: window["env"]["apiPort"] || "8080",
+  apiHost: window['env']['apiHost'] || 'http://localhost',
+  apiPort: window['env']['apiPort'] || '8080',
 };
-
-
 
 /*
  * For easier debugging in development mode, you can import the following file

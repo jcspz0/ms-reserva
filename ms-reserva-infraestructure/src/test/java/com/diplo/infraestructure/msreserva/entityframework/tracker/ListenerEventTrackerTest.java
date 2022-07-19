@@ -9,13 +9,13 @@ class ListenerEventTrackerTest {
 	@Test
 	void OnApplicationEvent() {
 		ListenerEventTracker listenerEventTracker = new ListenerEventTracker();
-		
+
 		listenerEventTracker.clearTracker();
-		listenerEventTracker.onApplicationEvent(new MessageEvent(listenerEventTracker, "accion"));
-		
+		listenerEventTracker.onApplicationEvent(
+			new MessageEvent(listenerEventTracker, "accion")
+		);
+
 		assertNotNull(listenerEventTracker);
 		assertNotNull(listenerEventTracker.getTrackersCargados());
-		
 	}
-
 }

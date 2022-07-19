@@ -6,8 +6,8 @@ import java.util.UUID;
 public abstract class DomainEvent {
 
 	public LocalDateTime OccuredOn;
-    public UUID Id;
-    
+	public UUID Id;
+
 	public DomainEvent(LocalDateTime occuredOn) {
 		super();
 		OccuredOn = occuredOn;
@@ -20,7 +20,4 @@ public abstract class DomainEvent {
 	public UUID getId() {
 		return Id;
 	}
-    
-    
-	
 }

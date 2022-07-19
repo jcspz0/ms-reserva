@@ -1,13 +1,11 @@
 package com.diplo.application.msreserva.usecase.command.reserva.crearpasajero;
 
-import java.util.UUID;
-
 import com.diplo.application.msreserva.mediator.request.IRequest;
+import java.util.UUID;
 
 public class CrearPasajeroCommand implements IRequest<UUID> {
 
-	public CrearPasajeroCommand() {
-	}
+	public CrearPasajeroCommand() {}
 
 	private int NroDoc;
 	private int TipoDoc;
@@ -15,7 +13,13 @@ public class CrearPasajeroCommand implements IRequest<UUID> {
 	private String PrimerApellido;
 	private String SegundoApellido;
 
-	public CrearPasajeroCommand(int nroDoc, int tipoDoc, String nombre, String primerApellido, String segundoApellido) {
+	public CrearPasajeroCommand(
+		int nroDoc,
+		int tipoDoc,
+		String nombre,
+		String primerApellido,
+		String segundoApellido
+	) {
 		super();
 		NroDoc = nroDoc;
 		TipoDoc = tipoDoc;
@@ -63,5 +67,4 @@ public class CrearPasajeroCommand implements IRequest<UUID> {
 	public void setSegundoApellido(String segundoApellido) {
 		SegundoApellido = segundoApellido;
 	}
-
 }

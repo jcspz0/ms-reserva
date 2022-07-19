@@ -1,11 +1,10 @@
 package com.diplo.application.msreserva.usecase.query.vuelo.getVuelosByDestino;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
 import com.diplo.application.msreserva.mediator.request.IRequest;
+import java.util.List;
+import java.util.UUID;
 
 public class GetVuelosByDestinoQuery implements IRequest<List<VueloDTO>> {
 
@@ -15,10 +14,8 @@ public class GetVuelosByDestinoQuery implements IRequest<List<VueloDTO>> {
 		super();
 		Destino = destino;
 	}
-	
-	public GetVuelosByDestinoQuery() {
-		
-	}
+
+	public GetVuelosByDestinoQuery() {}
 
 	public String getDestino() {
 		return Destino;
@@ -27,7 +24,4 @@ public class GetVuelosByDestinoQuery implements IRequest<List<VueloDTO>> {
 	public void setDestino(String destino) {
 		Destino = destino;
 	}
-	
-	
-	
 }

@@ -14,7 +14,4 @@ public class NumeroReserva extends ValueObject {
 	public String getValue() {
 		return value;
 	}
-	
-	
-	
 }

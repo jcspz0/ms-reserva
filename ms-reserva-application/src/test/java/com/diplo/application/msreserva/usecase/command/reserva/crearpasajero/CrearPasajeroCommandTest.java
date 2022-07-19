@@ -8,15 +8,14 @@ class CrearPasajeroCommandTest {
 
 	@Test
 	void CrearPasajeroCommand() {
-		
 		CrearPasajeroCommand crearPasajeroCommand = new CrearPasajeroCommand();
-		
-		int nroDoc=1;
-		int tipoDoc=1;
-		String nombre="nombre";
-		String primerApellido="apellido";
+
+		int nroDoc = 1;
+		int tipoDoc = 1;
+		String nombre = "nombre";
+		String primerApellido = "apellido";
 		String segundoApellido = "apellido2";
-		
+
 		crearPasajeroCommand.setNroDoc(nroDoc);
 		crearPasajeroCommand.setTipoDoc(tipoDoc);
 		crearPasajeroCommand.setNombre(nombre);
@@ -27,15 +26,27 @@ class CrearPasajeroCommandTest {
 		assertEquals(tipoDoc, crearPasajeroCommand.getTipoDoc());
 		assertEquals(nombre, crearPasajeroCommand.getNombre());
 		assertEquals(primerApellido, crearPasajeroCommand.getPrimerApellido());
-		assertEquals(segundoApellido, crearPasajeroCommand.getSegundoApellido());
+		assertEquals(
+			segundoApellido,
+			crearPasajeroCommand.getSegundoApellido()
+		);
 
-		crearPasajeroCommand = new CrearPasajeroCommand(nroDoc, tipoDoc, nombre, primerApellido, segundoApellido);
-	
+		crearPasajeroCommand =
+			new CrearPasajeroCommand(
+				nroDoc,
+				tipoDoc,
+				nombre,
+				primerApellido,
+				segundoApellido
+			);
+
 		assertEquals(nroDoc, crearPasajeroCommand.getNroDoc());
 		assertEquals(tipoDoc, crearPasajeroCommand.getTipoDoc());
 		assertEquals(nombre, crearPasajeroCommand.getNombre());
 		assertEquals(primerApellido, crearPasajeroCommand.getPrimerApellido());
-		assertEquals(segundoApellido, crearPasajeroCommand.getSegundoApellido());
+		assertEquals(
+			segundoApellido,
+			crearPasajeroCommand.getSegundoApellido()
+		);
 	}
-
 }

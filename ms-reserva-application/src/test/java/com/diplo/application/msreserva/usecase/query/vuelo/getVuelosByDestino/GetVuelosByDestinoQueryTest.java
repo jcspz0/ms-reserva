@@ -11,11 +11,9 @@ class GetVuelosByDestinoQueryTest {
 		String destino = "santa";
 		GetVuelosByDestinoQuery getVuelosByDestinoQuery = new GetVuelosByDestinoQuery();
 		getVuelosByDestinoQuery.setDestino(destino);
-		
-		getVuelosByDestinoQuery = new GetVuelosByDestinoQuery(destino);
-		
-		assertEquals(destino, getVuelosByDestinoQuery.getDestino());
-		
-	}
 
+		getVuelosByDestinoQuery = new GetVuelosByDestinoQuery(destino);
+
+		assertEquals(destino, getVuelosByDestinoQuery.getDestino());
+	}
 }

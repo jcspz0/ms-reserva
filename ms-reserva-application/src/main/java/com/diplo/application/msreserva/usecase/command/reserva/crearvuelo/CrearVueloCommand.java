@@ -1,37 +1,40 @@
 package com.diplo.application.msreserva.usecase.command.reserva.crearvuelo;
 
-import java.util.UUID;
-
 import com.diplo.application.msreserva.mediator.request.IRequest;
+import java.util.UUID;
 
 public class CrearVueloCommand implements IRequest<UUID> {
 
-	public CrearVueloCommand() {
-	}
-	
+	public CrearVueloCommand() {}
+
 	private String vueloId;
 	private int nroVuelo;
-	private int cantidadAsientoDisponible; 
+	private int cantidadAsientoDisponible;
 	private String destino;
-	
-	public CrearVueloCommand(String vueloId, int nroVuelo, int cantidadAsientoDisponible, String destino) {
+
+	public CrearVueloCommand(
+		String vueloId,
+		int nroVuelo,
+		int cantidadAsientoDisponible,
+		String destino
+	) {
 		super();
 		this.vueloId = vueloId;
 		this.nroVuelo = nroVuelo;
 		this.cantidadAsientoDisponible = cantidadAsientoDisponible;
 		this.destino = destino;
 	}
-	
-	
 
-	public CrearVueloCommand(int nroVuelo, int cantidadAsientoDisponible, String destino) {
+	public CrearVueloCommand(
+		int nroVuelo,
+		int cantidadAsientoDisponible,
+		String destino
+	) {
 		super();
 		this.nroVuelo = nroVuelo;
 		this.cantidadAsientoDisponible = cantidadAsientoDisponible;
 		this.destino = destino;
 	}
-
-
 
 	public int getNroVuelo() {
 		return nroVuelo;
@@ -64,13 +67,4 @@ public class CrearVueloCommand implements IRequest<UUID> {
 	public void setVueloId(String vueloId) {
 		this.vueloId = vueloId;
 	}
-	
-	
-	
-
-	
-	
-	
-	
-
 }
