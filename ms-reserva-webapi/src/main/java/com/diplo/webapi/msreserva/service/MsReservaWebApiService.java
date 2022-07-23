@@ -127,6 +127,7 @@ public class MsReservaWebApiService {
 	}
 
 	public IMediator getMediator() {
+		//comentario
 		return _mediator;
 	}
 }
