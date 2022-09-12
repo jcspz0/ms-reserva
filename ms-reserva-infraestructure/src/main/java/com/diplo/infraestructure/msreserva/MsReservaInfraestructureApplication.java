@@ -4,8 +4,6 @@ import com.diplo.application.msreserva.ReservaRepositoryImplTST;
 import com.diplo.application.msreserva.UnitOfWorkImplTST;
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.mediator.IMediator;
-import com.diplo.application.msreserva.mediator.Mediator;
 import com.diplo.application.msreserva.service.MsReservaApplicationService;
 import com.diplo.application.msreserva.service.reserva.IReservaService;
 import com.diplo.application.msreserva.service.reserva.ReservaService;
@@ -33,6 +31,8 @@ import com.diplo.msreserva.model.vuelo.Vuelo;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IUnitOfWork;
 import com.diplo.msreserva.repository.IVueloRepository;
+import com.diplo.sharedkernel.mediator.IMediator;
+import com.diplo.sharedkernel.mediator.Mediator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,28 +44,30 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({ "com.diplo" })
-public class MsReservaInfraestructureApplication implements CommandLineRunner {
-
+public class MsReservaInfraestructureApplication { //implements CommandLineRunner {
+	/*
 	//@Autowired
 	//DbReservaRepository reservaEntityRepository;
-
+	
 	@Autowired
 	DbVueloRepository vueloEntityRepository;
-
+	
 	@Autowired
 	MsReservaInfraestructureService _serviceInfra;
-
+	
 	@Autowired
 	UnitOfWork _unitOfWork;
-
+	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(MsReservaInfraestructureApplication.class, args);
+		
 	}
-
+	
 	@Override
-	public void run(String... strings) throws Exception {
-		//MsReservaInfraestructureService _serviceInfra = new MsReservaInfraestructureService(new MsReservaApplicationService(),reservaEntityRepository, new UnitOfWork());
-		/*	
+    public void run(String... strings) throws Exception {
+	//MsReservaInfraestructureService _serviceInfra = new MsReservaInfraestructureService(new MsReservaApplicationService(),reservaEntityRepository, new UnitOfWork());
+	/*	
 		_serviceInfra.setReservaRepository(reservaEntityRepository);
 		_serviceInfra.set_unitOfWork(_unitOfWork);
 		_serviceInfra.AddInfraestructure(new MsReservaApplicationService());
@@ -101,8 +103,8 @@ public class MsReservaInfraestructureApplication implements CommandLineRunner {
 		
 	*/
 
-		///-----------crear vuelo
-		/*	
+	///-----------crear vuelo
+	/*	
 		_serviceInfra.set_unitOfWork(_unitOfWork);
 		_serviceInfra.AddInfraestructure(new MsReservaApplicationService());
 		
@@ -133,5 +135,6 @@ public class MsReservaInfraestructureApplication implements CommandLineRunner {
 		
 		//----------------
 		*/
-	}
+	//  }
+
 }

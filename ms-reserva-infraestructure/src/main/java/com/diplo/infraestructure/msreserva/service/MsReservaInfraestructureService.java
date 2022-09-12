@@ -1,7 +1,5 @@
 package com.diplo.infraestructure.msreserva.service;
 
-import com.diplo.application.msreserva.mediator.IMediator;
-import com.diplo.application.msreserva.mediator.Mediator;
 import com.diplo.application.msreserva.service.IMediatorApplicationService;
 import com.diplo.application.msreserva.service.MsReservaApplicationService;
 import com.diplo.application.msreserva.service.reserva.IReservaService;
@@ -18,8 +16,10 @@ import com.diplo.msreserva.repository.IPasajeroRepository;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IUnitOfWork;
 import com.diplo.msreserva.repository.IVueloRepository;
-import com.diplo.sharekernel.core.IApplicationService;
-import com.diplo.sharekernel.core.IInfraestructureService;
+import com.diplo.sharedkernel.core.IApplicationService;
+import com.diplo.sharedkernel.event.IInfraestructureService;
+import com.diplo.sharedkernel.mediator.IMediator;
+import com.diplo.sharedkernel.mediator.Mediator;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;

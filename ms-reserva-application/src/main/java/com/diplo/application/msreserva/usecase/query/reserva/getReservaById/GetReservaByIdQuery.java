@@ -1,7 +1,7 @@
 package com.diplo.application.msreserva.usecase.query.reserva.getReservaById;
 
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
-import com.diplo.application.msreserva.mediator.request.IRequest;
+import com.diplo.sharedkernel.mediator.request.IRequest;
 import java.util.UUID;
 
 public class GetReservaByIdQuery implements IRequest<ReservaDTO> {

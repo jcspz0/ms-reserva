@@ -5,8 +5,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.mediator.IMediator;
 import com.diplo.msreserva.valueobjects.AsientoDisponible;
+import com.diplo.sharedkernel.mediator.IMediator;
 import com.diplo.webapi.msreserva.service.MsReservaWebApiService;
 import java.util.ArrayList;
 import java.util.List;

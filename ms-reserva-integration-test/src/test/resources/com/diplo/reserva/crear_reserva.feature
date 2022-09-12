@@ -11,5 +11,4 @@ Feature: Crear reserva
     Examples: 
       | nroReserva | pasajeroId                           | vueloId                              | precio | cantidadPasajero | codigo_resp |
       |        123 | 7b777a32-4d9e-4ecb-bd31-faa7902b0994 | 4f67286f-cf1f-4b0d-bab1-2a17d61d91bb |    100 |                1 |         200 |
-      |        123 | 7b777a32-4d9e-4ecb-bd31-faa7902b0994 | 7b83c7db-4ce1-436d-825f-396e8a1cb261 |    100 |                1 |         409 |
       |        123 | 7b777a32-4d9e-4ecb-bd31-faa7902b0994 | 7b83c7db-4ce1-436d-825f-999999999999 |    100 |                1 |         400 |

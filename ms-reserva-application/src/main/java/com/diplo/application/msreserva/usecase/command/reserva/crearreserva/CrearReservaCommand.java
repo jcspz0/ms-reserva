@@ -1,8 +1,8 @@
 package com.diplo.application.msreserva.usecase.command.reserva.crearreserva;
 
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.mediator.request.IRequest;
 import com.diplo.msreserva.model.vuelo.Vuelo;
+import com.diplo.sharedkernel.mediator.request.IRequest;
 import java.util.UUID;
 
 public class CrearReservaCommand implements IRequest<UUID> {

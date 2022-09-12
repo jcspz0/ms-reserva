@@ -6,7 +6,6 @@ import com.diplo.infraestructure.msreserva.entityframework.entity.VueloEntity;
 import com.diplo.infraestructure.msreserva.entityframework.entity.repository.PasajeroEntityRepository;
 import com.diplo.infraestructure.msreserva.entityframework.entity.repository.ReservaEntityRepository;
 import com.diplo.infraestructure.msreserva.entityframework.entity.repository.VueloEntityRepository;
-import com.diplo.infraestructure.msreserva.entityframework.tracker.MessageEvent;
 import com.diplo.msreserva.model.pasajero.Pasajero;
 import com.diplo.msreserva.model.reserva.Reserva;
 import com.diplo.msreserva.model.vuelo.Vuelo;
@@ -48,7 +47,7 @@ public class DbPasajeroRepository
 	@Override
 	public Future<Pasajero> FindByIdAsync(UUID id) {
 		try {
-			PasajeroEntity aux = _database.findById(id).get();
+			PasajeroEntity aux = _database.findById(id.toString()).get();
 			Pasajero result = new Pasajero(
 				UUID.fromString(aux.getPasajeroId()),
 				new NombreCompleto(
@@ -113,5 +112,11 @@ public class DbPasajeroRepository
 		ApplicationEventPublisher applicationEventPublisher
 	) {
 		this.applicationEventPublisher = applicationEventPublisher;
+	}
+
+	@Override
+	public void commit() {
+		// TODO Auto-generated method stub
+		return;
 	}
 }

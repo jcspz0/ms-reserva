@@ -2,11 +2,11 @@ package com.diplo.application.msreserva.usecase.query.vuelo.getVueloById;
 
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.mediator.request.IRequestHandler;
 import com.diplo.msreserva.model.reserva.Reserva;
 import com.diplo.msreserva.model.vuelo.Vuelo;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IVueloRepository;
+import com.diplo.sharedkernel.mediator.request.IRequestHandler;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;

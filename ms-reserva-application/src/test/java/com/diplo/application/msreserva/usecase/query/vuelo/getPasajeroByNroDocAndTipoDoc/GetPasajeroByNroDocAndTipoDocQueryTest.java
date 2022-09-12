@@ -2,6 +2,7 @@ package com.diplo.application.msreserva.usecase.query.vuelo.getPasajeroByNroDocA
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.diplo.application.msreserva.usecase.query.pasajero.getPasajeroByNroDocAndTipoDoc.GetPasajeroByNroDocAndTipoDocQuery;
 import org.junit.jupiter.api.Test;
 
 class GetPasajeroByNroDocAndTipoDocQueryTest {

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PasajeroEntityRepository
-	extends CrudRepository<PasajeroEntity, UUID> {
+	extends CrudRepository<PasajeroEntity, String> {
 	@Query(
 		value = "SELECT * FROM pasajero WHERE nrodoc = :nrodoc and tipodoc = :tipodoc limit 1",
 		nativeQuery = true

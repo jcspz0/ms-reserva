@@ -1,6 +1,6 @@
 package com.diplo.application.msreserva.usecase.command.reserva.crearpasajero;
 
-import com.diplo.application.msreserva.mediator.request.IRequest;
+import com.diplo.sharedkernel.mediator.request.IRequest;
 import java.util.UUID;
 
 public class CrearPasajeroCommand implements IRequest<UUID> {

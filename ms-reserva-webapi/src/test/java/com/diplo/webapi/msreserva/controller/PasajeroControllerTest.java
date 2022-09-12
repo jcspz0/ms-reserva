@@ -5,8 +5,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.diplo.application.msreserva.dto.pasajero.PasajeroDTO;
-import com.diplo.application.msreserva.mediator.IMediator;
-import com.diplo.application.msreserva.mediator.Mediator;
+import com.diplo.sharedkernel.mediator.IMediator;
+import com.diplo.sharedkernel.mediator.Mediator;
 import com.diplo.webapi.msreserva.service.MsReservaWebApiService;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;

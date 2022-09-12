@@ -2,14 +2,16 @@ package com.diplo.webapi.msreserva.controller;
 
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.mediator.IMediator;
 import com.diplo.application.msreserva.usecase.command.reserva.crearreserva.CrearReservaCommand;
 import com.diplo.application.msreserva.usecase.query.reserva.getReservaById.GetReservaByIdQuery;
 import com.diplo.application.msreserva.usecase.query.reserva.getreservasbyhoraandestado.GetReservasByHoraAndEstadoQuery;
 import com.diplo.application.msreserva.usecase.query.vuelo.getVueloById.GetVueloByIdQuery;
 import com.diplo.application.msreserva.usecase.query.vuelo.getVuelosByDestino.GetVuelosByDestinoQuery;
+import com.diplo.infraestructure.msreserva.amqp.RabbitMQReservaCreadaSender;
 import com.diplo.infraestructure.msreserva.memoryrepository.MemoryReservaRepository;
 import com.diplo.msreserva.model.vuelo.Vuelo;
+import com.diplo.sharedkernel.integrationevents.IntegrationReservaCreada;
+import com.diplo.sharedkernel.mediator.IMediator;
 import com.diplo.webapi.msreserva.service.MsReservaWebApiService;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -81,6 +83,7 @@ public class ReservaController {
 				"Problema al cargar la respuesta"
 			);
 		}
+
 		return reservaDTO;
 		/*} catch (Exception e) {
 			System.out.println("Excepcion "+e);	
@@ -124,7 +127,7 @@ public class ReservaController {
 		try {
 			listadoDTO =
 				this._reservaService.getMediator()
-					.Send(new GetReservasByHoraAndEstadoQuery(hora, "VALIDO"));
+					.Send(new GetReservasByHoraAndEstadoQuery(hora, "CREADA"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

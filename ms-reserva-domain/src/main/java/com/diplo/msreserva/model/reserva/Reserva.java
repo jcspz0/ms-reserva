@@ -6,7 +6,11 @@ import com.diplo.msreserva.valueobjects.CantidadPasajero;
 import com.diplo.msreserva.valueobjects.HoraReserva;
 import com.diplo.msreserva.valueobjects.Monto;
 import com.diplo.msreserva.valueobjects.NumeroReserva;
-import com.diplo.sharekernel.core.AggregateRoot;
+import com.diplo.sharedkernel.core.AggregateRoot;
+import com.diplo.sharedkernel.core.Constant;
+import com.diplo.sharedkernel.event.IntegrationEvent;
+import com.diplo.sharedkernel.integrationevents.IntegrationDeudaPagadaRollback;
+import com.diplo.sharedkernel.integrationevents.IntegrationReservaConfirmada;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,6 +23,7 @@ public class Reserva extends AggregateRoot<UUID> {
 	private Monto Precio;
 	private CantidadPasajero CantidadPasajero;
 	private String Estado;
+	private String estadoValido = Constant.RESERVAESTADOCREADA;
 
 	public Reserva(
 		NumeroReserva nroReserva,
@@ -35,7 +40,7 @@ public class Reserva extends AggregateRoot<UUID> {
 		VueloId = vueloId;
 		this.Precio = precio;
 		this.CantidadPasajero = cantidadPasajero;
-		this.Estado = "VALIDO";
+		this.Estado = estadoValido;
 	}
 
 	public Reserva(
@@ -54,7 +59,7 @@ public class Reserva extends AggregateRoot<UUID> {
 		VueloId = vueloId;
 		this.Precio = precio;
 		this.CantidadPasajero = cantidadPasajero;
-		this.Estado = "VALIDO";
+		this.Estado = estadoValido;
 	}
 
 	public Reserva(
@@ -92,11 +97,7 @@ public class Reserva extends AggregateRoot<UUID> {
 		VueloId = vueloId;
 		this.Precio = new Monto(precio);
 		this.CantidadPasajero = new CantidadPasajero(cantidadPasajero);
-		// TODO Auto-generated catch block
-		System.out.println(
-			"Se tuvo un error al cargar la cantidad de pasajero"
-		);
-		this.Estado = "VALIDO";
+		this.Estado = estadoValido;
 	}
 
 	public Reserva(
@@ -120,7 +121,7 @@ public class Reserva extends AggregateRoot<UUID> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.Estado = "VALIDO";
+		this.Estado = estadoValido;
 	}
 
 	public boolean RealizarReserva(Vuelo vuelo) {
@@ -129,18 +130,41 @@ public class Reserva extends AggregateRoot<UUID> {
 				this.getCantidadPasajero().getCantidad()
 			)
 		) {
-			AddDomainEvent(
-				new ReservaCreada(
-					this.Id,
-					this.NroReserva,
-					this.VueloId,
-					this.PasajeroId,
-					this.Hora
-				)
-			);
+			//notificarReservaCreada();
 			return true;
 		}
 		return false;
+	}
+
+	public void VencerReserva() throws Exception {
+		if (this.Estado.compareTo(Constant.RESERVAESTADOCREADA) != 0) {
+			throw new Exception(
+				"La reserva no se puede cancelar, su estado no es " +
+				Constant.RESERVAESTADOCREADA
+			);
+		}
+		this.Estado = Constant.RESERVAESTADOVENCIDA;
+	}
+
+	public void ConfirmarReserva(
+		String pagoId,
+		String vueloId,
+		String destino,
+		int nroDoc,
+		int tipoDoc,
+		String nombreCompletoPasajero
+	) throws Exception {
+		if (this.Estado.compareTo(Constant.RESERVAESTADOVENCIDA) == 0) {
+			throw new Exception("No se puede confirmar una reserva vencida");
+		}
+		this.Estado = Constant.RESERVAESTADOCONFIRMADA;
+		//AddIntegrationEvent(new IntegrationEvent(new IntegrationReservaConfirmada(this.Id.toString(), this.getVueloId().toString(), tipoDoc, nroDoc, nombreCompletoPasajero, this.Hora.getHora().toString(), destino, CantidadPasajero.getCantidad()), LocalDateTime.now().toString()));
+	}
+
+	public void DeshacerConfirmacion() {
+		if (this.Estado.compareTo(Constant.RESERVAESTADOCONFIRMADA) == 0) {
+			this.Estado = Constant.RESERVAESTADOCREADA;
+		}
 	}
 
 	public HoraReserva getHora() {

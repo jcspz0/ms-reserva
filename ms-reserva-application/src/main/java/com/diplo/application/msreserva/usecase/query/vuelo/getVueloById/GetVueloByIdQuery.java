@@ -2,7 +2,7 @@ package com.diplo.application.msreserva.usecase.query.vuelo.getVueloById;
 
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.mediator.request.IRequest;
+import com.diplo.sharedkernel.mediator.request.IRequest;
 import java.util.UUID;
 
 public class GetVueloByIdQuery implements IRequest<VueloDTO> {

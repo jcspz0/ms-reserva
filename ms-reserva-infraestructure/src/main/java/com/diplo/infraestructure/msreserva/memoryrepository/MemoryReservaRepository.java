@@ -51,4 +51,10 @@ public class MemoryReservaRepository implements IReservaRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void commit() {
+		// TODO Auto-generated method stub
+		return;
+	}
 }

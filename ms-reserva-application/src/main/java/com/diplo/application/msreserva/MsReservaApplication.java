@@ -1,8 +1,6 @@
 package com.diplo.application.msreserva;
 
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
-import com.diplo.application.msreserva.mediator.IMediator;
-import com.diplo.application.msreserva.mediator.Mediator;
 import com.diplo.application.msreserva.service.MsReservaApplicationService;
 import com.diplo.application.msreserva.service.reserva.IReservaService;
 import com.diplo.application.msreserva.service.reserva.ReservaService;
@@ -15,6 +13,8 @@ import com.diplo.msreserva.factory.ReservaFactory;
 import com.diplo.msreserva.model.reserva.Reserva;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IUnitOfWork;
+import com.diplo.sharedkernel.mediator.IMediator;
+import com.diplo.sharedkernel.mediator.Mediator;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -25,12 +25,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MsReservaApplication {
-
+	/*
 	@Autowired
 	static MsReservaApplicationService serviceApp;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MsReservaApplication.class, args);
+		
 		/*serviceApp= new MsReservaApplicationService();
 		serviceApp.AddApplication();
 		
@@ -61,5 +62,6 @@ public class MsReservaApplication {
 		
 		
 		*/
-	}
+	//	}
+
 }

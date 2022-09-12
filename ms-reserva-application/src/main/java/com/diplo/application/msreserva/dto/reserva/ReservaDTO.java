@@ -57,6 +57,7 @@ public class ReservaDTO {
 		Precio = precio;
 		CantidadPasajero = cantidadPasajero;
 		Estado = estado;
+		this.NroReserva = nroReserva;
 	}
 
 	public ReservaDTO(Reserva aux) {

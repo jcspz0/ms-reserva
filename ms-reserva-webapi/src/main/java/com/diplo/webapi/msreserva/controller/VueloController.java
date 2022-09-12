@@ -2,13 +2,13 @@ package com.diplo.webapi.msreserva.controller;
 
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.mediator.IMediator;
 import com.diplo.application.msreserva.usecase.command.reserva.crearpasajero.CrearPasajeroCommand;
 import com.diplo.application.msreserva.usecase.command.reserva.crearreserva.CrearReservaCommand;
 import com.diplo.application.msreserva.usecase.command.reserva.crearvuelo.CrearVueloCommand;
 import com.diplo.application.msreserva.usecase.query.reserva.getReservaById.GetReservaByIdQuery;
 import com.diplo.application.msreserva.usecase.query.vuelo.getVuelosByDestino.GetVuelosByDestinoQuery;
 import com.diplo.infraestructure.msreserva.memoryrepository.MemoryReservaRepository;
+import com.diplo.sharedkernel.mediator.IMediator;
 import com.diplo.webapi.msreserva.service.MsReservaWebApiService;
 import java.time.LocalDateTime;
 import java.util.List;

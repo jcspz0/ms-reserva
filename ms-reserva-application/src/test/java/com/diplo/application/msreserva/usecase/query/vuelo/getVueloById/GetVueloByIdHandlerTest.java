@@ -7,7 +7,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.usecase.query.vuelo.getPasajeroByNroDocAndTipoDoc.GetPasajeroByNroDocAndTipoDocHandler;
+import com.diplo.application.msreserva.usecase.query.pasajero.getPasajeroByNroDocAndTipoDoc.GetPasajeroByNroDocAndTipoDocHandler;
 import com.diplo.msreserva.model.pasajero.Pasajero;
 import com.diplo.msreserva.model.vuelo.Vuelo;
 import com.diplo.msreserva.repository.IVueloRepository;
