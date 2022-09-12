@@ -1,6 +1,5 @@
 package com.diplo.application.msreserva.usecase.command.reserva.crearvuelo;
 
-import com.diplo.application.msreserva.mediator.request.IRequestHandler;
 import com.diplo.application.msreserva.service.reserva.IReservaService;
 import com.diplo.msreserva.factory.IReservaFactory;
 import com.diplo.msreserva.model.reserva.Reserva;
@@ -11,6 +10,7 @@ import com.diplo.msreserva.repository.IVueloRepository;
 import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.sharedkernel.mediator.request.IRequestHandler;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;

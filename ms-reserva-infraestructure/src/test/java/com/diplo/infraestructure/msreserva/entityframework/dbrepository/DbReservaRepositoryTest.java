@@ -95,7 +95,7 @@ class DbReservaRepositoryTest {
 		Future<Reserva> resultado = dbReservaRepositoryTest.CreateAsync(
 			reservaTest
 		);
-
+		dbReservaRepositoryTest.commit();
 		assertNotNull(resultado);
 		assertEquals(reservaTest.getId(), resultado.get().getId());
 	}
@@ -105,7 +105,7 @@ class DbReservaRepositoryTest {
 		Future<Reserva> resultado = dbReservaRepositoryTest.UpdateAsync(
 			reservaTest
 		);
-
+		dbReservaRepositoryTest.commit();
 		assertNotNull(resultado);
 		assertEquals(reservaTest.getId(), resultado.get().getId());
 	}

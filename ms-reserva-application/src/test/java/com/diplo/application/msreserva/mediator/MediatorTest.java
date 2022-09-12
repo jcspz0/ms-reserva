@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.diplo.application.msreserva.mediator.request.IRequest;
-import com.diplo.application.msreserva.mediator.request.IRequestHandler;
 import com.diplo.application.msreserva.usecase.command.reserva.crearreserva.CrearReservaCommand;
 import com.diplo.application.msreserva.usecase.command.reserva.crearreserva.CrearReservaHandler;
 import com.diplo.application.msreserva.usecase.command.reserva.crearvuelo.CrearVueloCommand;
@@ -17,6 +15,9 @@ import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NombreCompleto;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.sharedkernel.mediator.Mediator;
+import com.diplo.sharedkernel.mediator.request.IRequest;
+import com.diplo.sharedkernel.mediator.request.IRequestHandler;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;

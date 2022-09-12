@@ -6,6 +6,8 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import com.diplo.application.msreserva.dto.pasajero.PasajeroDTO;
+import com.diplo.application.msreserva.usecase.query.pasajero.getPasajeroByNroDocAndTipoDoc.GetPasajeroByNroDocAndTipoDocHandler;
+import com.diplo.application.msreserva.usecase.query.pasajero.getPasajeroByNroDocAndTipoDoc.GetPasajeroByNroDocAndTipoDocQuery;
 import com.diplo.application.msreserva.usecase.query.reserva.getreservasbyhoraandestado.GetReservasByHoraAndEstadoHandler;
 import com.diplo.msreserva.model.pasajero.Pasajero;
 import com.diplo.msreserva.model.reserva.Reserva;

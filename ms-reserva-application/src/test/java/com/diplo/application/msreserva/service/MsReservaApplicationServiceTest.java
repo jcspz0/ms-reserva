@@ -2,9 +2,9 @@ package com.diplo.application.msreserva.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.diplo.application.msreserva.mediator.Mediator;
 import com.diplo.application.msreserva.service.reserva.ReservaService;
 import com.diplo.msreserva.factory.ReservaFactory;
+import com.diplo.sharedkernel.mediator.Mediator;
 import org.junit.jupiter.api.Test;
 
 class MsReservaApplicationServiceTest {

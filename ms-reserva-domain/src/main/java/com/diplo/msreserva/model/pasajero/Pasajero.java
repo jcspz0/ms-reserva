@@ -2,7 +2,7 @@ package com.diplo.msreserva.model.pasajero;
 
 import com.diplo.msreserva.valueobjects.DocumentoIdentidad;
 import com.diplo.msreserva.valueobjects.NombreCompleto;
-import com.diplo.sharekernel.core.AggregateRoot;
+import com.diplo.sharedkernel.core.AggregateRoot;
 import java.util.UUID;
 
 public class Pasajero extends AggregateRoot<UUID> {

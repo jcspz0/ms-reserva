@@ -1,9 +1,10 @@
 package com.diplo.msreserva.model.vuelo;
 
+import com.diplo.msreserva.event.DisponibilidadReducida;
 import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
-import com.diplo.sharekernel.core.AggregateRoot;
+import com.diplo.sharedkernel.core.AggregateRoot;
 import java.util.UUID;
 
 public class Vuelo extends AggregateRoot<UUID> {
@@ -65,6 +66,12 @@ public class Vuelo extends AggregateRoot<UUID> {
 					this.CantidadAsientoDisponible.getDisponibilidad() -
 					cantidad
 				);
+			AddDomainEvent(
+				new DisponibilidadReducida(
+					this.Id,
+					this.CantidadAsientoDisponible.getDisponibilidad()
+				)
+			);
 			return true;
 		}
 		System.out.println(

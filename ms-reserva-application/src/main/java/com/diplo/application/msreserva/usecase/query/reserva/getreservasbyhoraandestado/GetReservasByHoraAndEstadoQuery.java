@@ -2,7 +2,7 @@ package com.diplo.application.msreserva.usecase.query.reserva.getreservasbyhoraa
 
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.application.msreserva.dto.vuelo.VueloDTO;
-import com.diplo.application.msreserva.mediator.request.IRequest;
+import com.diplo.sharedkernel.mediator.request.IRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;

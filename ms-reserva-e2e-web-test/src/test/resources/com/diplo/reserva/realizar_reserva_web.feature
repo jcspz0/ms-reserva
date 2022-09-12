@@ -13,4 +13,4 @@ Feature: Realizar Reserva desde la web
 
     Examples: 
       | destino | nombre | primer_apellido | segundo_apellido | nrodoc | tipodoc | precio | cantidad_pasajeros | codigo_resp |
-      | santa   | juan   | perez           | pereza           |     101 |       1 |    100 |                  1 |         200 |
+      | santa   | juan   | perez           | pereza           |     1	 |       1 |    100 |                  1 |         200 |

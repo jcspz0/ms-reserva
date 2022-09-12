@@ -2,15 +2,15 @@ package com.diplo.application.msreserva.service;
 
 import com.diplo.application.msreserva.ReservaRepositoryImplTST;
 import com.diplo.application.msreserva.UnitOfWorkImplTST;
-import com.diplo.application.msreserva.mediator.IMediator;
-import com.diplo.application.msreserva.mediator.Mediator;
 import com.diplo.application.msreserva.service.reserva.IReservaService;
 import com.diplo.application.msreserva.service.reserva.ReservaService;
 import com.diplo.msreserva.factory.IReservaFactory;
 import com.diplo.msreserva.factory.ReservaFactory;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IUnitOfWork;
-import com.diplo.sharekernel.core.IApplicationService;
+import com.diplo.sharedkernel.core.IApplicationService;
+import com.diplo.sharedkernel.mediator.IMediator;
+import com.diplo.sharedkernel.mediator.Mediator;
 import org.springframework.stereotype.Service;
 
 @Service

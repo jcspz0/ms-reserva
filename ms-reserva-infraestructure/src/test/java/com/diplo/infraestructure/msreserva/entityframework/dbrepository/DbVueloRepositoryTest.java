@@ -93,7 +93,7 @@ class DbVueloRepositoryTest {
 	@Test
 	void CreateAsync() throws InterruptedException, ExecutionException {
 		Future<Vuelo> resultado = dbVueloRepositoryTest.CreateAsync(vueloTest);
-
+		dbVueloRepositoryTest.commit();
 		assertNotNull(resultado);
 		assertEquals(vueloTest.getId(), resultado.get().getId());
 	}
@@ -101,7 +101,7 @@ class DbVueloRepositoryTest {
 	@Test
 	void UpdateAsync() throws InterruptedException, ExecutionException {
 		Future<Vuelo> resultado = dbVueloRepositoryTest.UpdateAsync(vueloTest);
-
+		dbVueloRepositoryTest.commit();
 		assertNotNull(resultado);
 		assertEquals(vueloTest.getId(), resultado.get().getId());
 	}

@@ -226,6 +226,7 @@ public class realizar_reserva {
 	@And("crear reserva con los datos obtenidos")
 	public void crearReserva() {
 		initClientRest();
+		nroReserva = "123456Test";
 		requestReserva =
 			new ReservaDTO(
 				nroReserva,
@@ -236,7 +237,7 @@ public class realizar_reserva {
 				null,
 				null
 			);
-
+		System.out.println(requestReserva);
 		resultadoRestReserva =
 			client
 				.post()
@@ -272,12 +273,15 @@ public class realizar_reserva {
 		try {
 			resultadoRestReserva.subscribe(resultado -> {
 				id = resultado.getReservaId();
+				System.out.println(id);
+				System.out.println(resultado.getPrecio());
 			});
-			resultadoRestReserva.block();
+			Thread.sleep(5000);
+			//resultadoRestReserva.block();
 			System.out.println(
 				"Se creo la reserva " +
 				id +
-				"codigo de respuesta " +
+				" codigo de respuesta " +
 				estatusCode
 			);
 		} catch (Exception e) {

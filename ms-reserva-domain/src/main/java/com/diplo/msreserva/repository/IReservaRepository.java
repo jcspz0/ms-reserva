@@ -3,7 +3,7 @@ package com.diplo.msreserva.repository;
 import com.diplo.msreserva.model.reserva.Reserva;
 import com.diplo.msreserva.model.vuelo.Vuelo;
 import com.diplo.msreserva.valueobjects.Destino;
-import com.diplo.sharekernel.core.IRepository;
+import com.diplo.sharedkernel.core.IRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -16,4 +16,6 @@ public interface IReservaRepository extends IRepository<Reserva, UUID> {
 		LocalDateTime hora,
 		String estado
 	);
+
+	void commit();
 }

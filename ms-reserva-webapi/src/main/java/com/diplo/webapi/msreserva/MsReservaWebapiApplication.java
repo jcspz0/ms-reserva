@@ -1,8 +1,6 @@
 package com.diplo.webapi.msreserva;
 
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
-import com.diplo.application.msreserva.mediator.IMediator;
-import com.diplo.application.msreserva.mediator.Mediator;
 import com.diplo.application.msreserva.service.reserva.IReservaService;
 import com.diplo.application.msreserva.service.reserva.ReservaService;
 import com.diplo.application.msreserva.usecase.command.reserva.crearreserva.CrearReservaCommand;
@@ -17,6 +15,8 @@ import com.diplo.msreserva.factory.ReservaFactory;
 import com.diplo.msreserva.model.reserva.Reserva;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IUnitOfWork;
+import com.diplo.sharedkernel.mediator.IMediator;
+import com.diplo.sharedkernel.mediator.Mediator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

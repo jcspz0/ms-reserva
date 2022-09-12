@@ -40,6 +40,7 @@ class MsReservaInfraestructureServiceTest {
 			_pasajeroRepository,
 			_unitOfWork
 		);
+		msReservaInfraestructureService.AddInfraestructure(service);
 		msReservaInfraestructureService.set_unitOfWork(_unitOfWork);
 		msReservaInfraestructureService.setPasajeroRepository(
 			_pasajeroRepository

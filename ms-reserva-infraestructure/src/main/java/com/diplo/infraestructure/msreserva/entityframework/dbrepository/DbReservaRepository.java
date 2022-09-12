@@ -3,7 +3,6 @@ package com.diplo.infraestructure.msreserva.entityframework.dbrepository;
 import com.diplo.infraestructure.msreserva.entityframework.entity.ReservaEntity;
 import com.diplo.infraestructure.msreserva.entityframework.entity.VueloEntity;
 import com.diplo.infraestructure.msreserva.entityframework.entity.repository.ReservaEntityRepository;
-import com.diplo.infraestructure.msreserva.entityframework.tracker.MessageEvent;
 import com.diplo.msreserva.model.reserva.Reserva;
 import com.diplo.msreserva.model.vuelo.Vuelo;
 import com.diplo.msreserva.repository.IReservaRepository;
@@ -13,9 +12,17 @@ import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.Monto;
 import com.diplo.msreserva.valueobjects.NumeroReserva;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.sharedkernel.core.Constant;
+import com.diplo.sharedkernel.event.DomainEvent;
+import com.diplo.sharedkernel.event.IntegrationEvent;
+import com.diplo.sharedkernel.event.IntegrationMessage;
+import com.diplo.sharedkernel.event.MessageEvent;
+import com.diplo.sharedkernel.integrationevents.IntegrationReservaCreada;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
@@ -35,6 +42,8 @@ public class DbReservaRepository
 
 	@Autowired
 	private ReservaEntityRepository _database;
+
+	private Map<String, List<Reserva>> context = null;
 
 	@Autowired
 	private ApplicationEventPublisher applicationEventPublisher = null;
@@ -56,16 +65,18 @@ public class DbReservaRepository
 	@Override
 	public Future<Reserva> CreateAsync(Reserva obj) {
 		System.out.println("CreateAsync DBRepository");
-		_database.save(new ReservaEntity(obj));
-		//this.applicationEventPublisher.publishEvent(new MessageEvent(obj,"create"));
+		// _database.save(new ReservaEntity(obj));
+		register(obj, Constant.createAction);
+
 		return CompletableFuture.completedFuture(obj);
 	}
 
 	@Override
 	public Future<Reserva> UpdateAsync(Reserva obj) {
 		System.out.println("UpdateAsync DBRepository");
-		_database.save(new ReservaEntity(obj));
-		//this.applicationEventPublisher.publishEvent(new MessageEvent(obj,"update"));
+		// _database.save(new ReservaEntity(obj));
+		register(obj, Constant.updateAction);
+		//this.applicationEventPublisher.publishEvent(new MessageEvent(obj,Constant.updateAction));
 		return CompletableFuture.completedFuture(obj);
 	}
 
@@ -109,5 +120,59 @@ public class DbReservaRepository
 			);
 			return CompletableFuture.completedFuture(null);
 		}
+	}
+
+	private void register(Reserva reserva, String action) {
+		if (context == null) {
+			context = new HashMap<String, List<Reserva>>();
+		}
+		ArrayList<Reserva> ReservaToOperate = (ArrayList<Reserva>) context.get(
+			action
+		);
+		if (ReservaToOperate == null) {
+			ReservaToOperate = new ArrayList<>();
+		}
+		ReservaToOperate.add(reserva);
+		context.put(action, ReservaToOperate);
+		for (DomainEvent event : reserva.getDomainEvents()) {
+			this.applicationEventPublisher.publishEvent(
+					new MessageEvent(event, action)
+				);
+		}
+		for (IntegrationEvent event : reserva.getIntegrationEvents()) {
+			System.out.println(
+				"DbReservaRepository -> en for de eventos " + event
+			);
+			this.applicationEventPublisher.publishEvent(event);
+		}
+	}
+
+	@Override
+	public void commit() {
+		if (context == null || context.size() == 0) {
+			return;
+		}
+		if (context.containsKey(Constant.createAction)) {
+			commitCreate();
+		}
+		if (context.containsKey(Constant.updateAction)) {
+			commitUpdate();
+		}
+	}
+
+	private void commitCreate() {
+		List<Reserva> ReservasToCreate = context.get(Constant.createAction);
+		for (Reserva reserva : ReservasToCreate) {
+			_database.save(new ReservaEntity(reserva));
+		}
+		context.remove(Constant.createAction);
+	}
+
+	private void commitUpdate() {
+		List<Reserva> ReservasToCreate = context.get(Constant.updateAction);
+		for (Reserva reserva : ReservasToCreate) {
+			_database.save(new ReservaEntity(reserva));
+		}
+		context.remove(Constant.updateAction);
 	}
 }

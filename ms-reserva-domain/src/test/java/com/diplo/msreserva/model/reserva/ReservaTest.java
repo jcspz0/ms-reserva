@@ -9,6 +9,7 @@ import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.Monto;
 import com.diplo.msreserva.valueobjects.NumeroReserva;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.sharedkernel.core.Constant;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +57,149 @@ class ReservaTest {
 		boolean result = reservaTest.RealizarReserva(vueloTest);
 
 		assertFalse(result);
+	}
+
+	@Test
+	void VencerReserva() throws Exception {
+		Vuelo vueloTest = new Vuelo(
+			UUID.randomUUID(),
+			new NumeroVuelo(1),
+			new Destino("Santa"),
+			new AsientoDisponible(5)
+		);
+		Reserva reservaTest = new Reserva(
+			UUID.randomUUID(),
+			new NumeroReserva("10"),
+			UUID.randomUUID(),
+			vueloTest.getId(),
+			new Monto(100),
+			new CantidadPasajero(8)
+		);
+
+		reservaTest.VencerReserva();
+
+		assertEquals(Constant.RESERVAESTADOVENCIDA, reservaTest.getEstado());
+	}
+
+	@Test
+	void VencerReservaConError() throws Exception {
+		Vuelo vueloTest = new Vuelo(
+			UUID.randomUUID(),
+			new NumeroVuelo(1),
+			new Destino("Santa"),
+			new AsientoDisponible(5)
+		);
+		Reserva reservaTest = new Reserva(
+			UUID.randomUUID(),
+			new NumeroReserva("10"),
+			UUID.randomUUID(),
+			vueloTest.getId(),
+			new Monto(100),
+			new CantidadPasajero(8),
+			Constant.RESERVAESTADOCONFIRMADA
+		);
+
+		Exception exception = assertThrows(
+			Exception.class,
+			() -> {
+				reservaTest.VencerReserva();
+			}
+		);
+		//
+
+		assertEquals(
+			"La reserva no se puede cancelar, su estado no es " +
+			Constant.RESERVAESTADOCREADA,
+			exception.getMessage()
+		);
+	}
+
+	@Test
+	void DeshacerConfirmacion() throws Exception {
+		Vuelo vueloTest = new Vuelo(
+			UUID.randomUUID(),
+			new NumeroVuelo(1),
+			new Destino("Santa"),
+			new AsientoDisponible(5)
+		);
+		Reserva reservaTest = new Reserva(
+			UUID.randomUUID(),
+			new NumeroReserva("10"),
+			UUID.randomUUID(),
+			vueloTest.getId(),
+			new Monto(100),
+			new CantidadPasajero(8)
+		);
+
+		reservaTest.DeshacerConfirmacion();
+
+		assertEquals(Constant.RESERVAESTADOCREADA, reservaTest.getEstado());
+	}
+
+	@Test
+	void ConfirmarReserva() throws Exception {
+		Vuelo vueloTest = new Vuelo(
+			UUID.randomUUID(),
+			new NumeroVuelo(1),
+			new Destino("Santa"),
+			new AsientoDisponible(5)
+		);
+		Reserva reservaTest = new Reserva(
+			UUID.randomUUID(),
+			new NumeroReserva("10"),
+			UUID.randomUUID(),
+			vueloTest.getId(),
+			new Monto(100),
+			new CantidadPasajero(8)
+		);
+
+		reservaTest.ConfirmarReserva(
+			UUID.randomUUID().toString(),
+			UUID.randomUUID().toString(),
+			"Santa",
+			1,
+			1,
+			"Juan"
+		);
+
+		assertEquals(Constant.RESERVAESTADOCONFIRMADA, reservaTest.getEstado());
+	}
+
+	@Test
+	void ConfirmarReservaConError() throws Exception {
+		Vuelo vueloTest = new Vuelo(
+			UUID.randomUUID(),
+			new NumeroVuelo(1),
+			new Destino("Santa"),
+			new AsientoDisponible(5)
+		);
+		Reserva reservaTest = new Reserva(
+			UUID.randomUUID(),
+			new NumeroReserva("10"),
+			UUID.randomUUID(),
+			vueloTest.getId(),
+			new Monto(100),
+			new CantidadPasajero(8)
+		);
+
+		Exception exception = assertThrows(
+			Exception.class,
+			() -> {
+				reservaTest.VencerReserva();
+				reservaTest.ConfirmarReserva(
+					UUID.randomUUID().toString(),
+					UUID.randomUUID().toString(),
+					"Santa",
+					1,
+					1,
+					"Juan"
+				);
+			}
+		);
+		assertEquals(
+			"No se puede confirmar una reserva vencida",
+			exception.getMessage()
+		);
 	}
 
 	@Test
@@ -115,7 +259,7 @@ class ReservaTest {
 			nroReservaTest.getValue(),
 			reservaTest.getNroReserva().getValue()
 		);
-		assertEquals("VALIDO", reservaTest.getEstado());
+		assertEquals(Constant.RESERVAESTADOCREADA, reservaTest.getEstado());
 
 		reservaTest =
 			new Reserva(
@@ -125,7 +269,7 @@ class ReservaTest {
 				vueloIdTest,
 				precioTest,
 				cantidadPasajeroTest,
-				"VALIDO"
+				Constant.RESERVAESTADOCREADA
 			);
 
 		assertNotNull(reservaTest.getHora());
@@ -134,7 +278,7 @@ class ReservaTest {
 			nroReservaTest.getValue(),
 			reservaTest.getNroReserva().getValue()
 		);
-		assertEquals("VALIDO", reservaTest.getEstado());
+		assertEquals(Constant.RESERVAESTADOCREADA, reservaTest.getEstado());
 
 		reservaTest =
 			new Reserva(
@@ -151,7 +295,7 @@ class ReservaTest {
 			nroReservaTest.getValue(),
 			reservaTest.getNroReserva().getValue()
 		);
-		assertEquals("VALIDO", reservaTest.getEstado());
+		assertEquals(Constant.RESERVAESTADOCREADA, reservaTest.getEstado());
 
 		reservaTest =
 			new Reserva(
@@ -168,7 +312,7 @@ class ReservaTest {
 			nroReservaTest.getValue(),
 			reservaTest.getNroReserva().getValue()
 		);
-		assertEquals("VALIDO", reservaTest.getEstado());
+		assertEquals(Constant.RESERVAESTADOCREADA, reservaTest.getEstado());
 
 		reservaTest =
 			new Reserva(
@@ -186,6 +330,6 @@ class ReservaTest {
 			nroReservaTest.getValue(),
 			reservaTest.getNroReserva().getValue()
 		);
-		assertEquals("VALIDO", reservaTest.getEstado());
+		assertEquals(Constant.RESERVAESTADOCREADA, reservaTest.getEstado());
 	}
 }
