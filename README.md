@@ -25,4 +25,4 @@ Para ejecutar como docker-compose solo se debe de ejecutar el siguiente comando
 `docker-compose up`
 Nota: tomar en cuenta que el ms-reserva-service no funcionará hasta que la ms-reserva-db este lista (si no existe la BD aun tardará más)
 
-Agregando gitflow;
+Agregando gitflow.;

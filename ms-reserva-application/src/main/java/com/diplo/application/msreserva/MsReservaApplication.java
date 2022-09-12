@@ -25,13 +25,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MsReservaApplication {
-	/*
+
 	@Autowired
 	static MsReservaApplicationService serviceApp;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MsReservaApplication.class, args);
-		
 		/*serviceApp= new MsReservaApplicationService();
 		serviceApp.AddApplication();
 		
@@ -62,6 +61,5 @@ public class MsReservaApplication {
 		
 		
 		*/
-	//	}
-
+	}
 }
