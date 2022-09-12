@@ -44,30 +44,28 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({ "com.diplo" })
-public class MsReservaInfraestructureApplication { //implements CommandLineRunner {
-	/*
+public class MsReservaInfraestructureApplication implements CommandLineRunner {
+
 	//@Autowired
 	//DbReservaRepository reservaEntityRepository;
-	
+
 	@Autowired
 	DbVueloRepository vueloEntityRepository;
-	
+
 	@Autowired
 	MsReservaInfraestructureService _serviceInfra;
-	
+
 	@Autowired
 	UnitOfWork _unitOfWork;
-	
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(MsReservaInfraestructureApplication.class, args);
-		
 	}
-	
+
 	@Override
-    public void run(String... strings) throws Exception {
-	//MsReservaInfraestructureService _serviceInfra = new MsReservaInfraestructureService(new MsReservaApplicationService(),reservaEntityRepository, new UnitOfWork());
-	/*	
+	public void run(String... strings) throws Exception {
+		//MsReservaInfraestructureService _serviceInfra = new MsReservaInfraestructureService(new MsReservaApplicationService(),reservaEntityRepository, new UnitOfWork());
+		/*	
 		_serviceInfra.setReservaRepository(reservaEntityRepository);
 		_serviceInfra.set_unitOfWork(_unitOfWork);
 		_serviceInfra.AddInfraestructure(new MsReservaApplicationService());
@@ -103,8 +101,8 @@ public class MsReservaInfraestructureApplication { //implements CommandLineRunne
 		
 	*/
 
-	///-----------crear vuelo
-	/*	
+		///-----------crear vuelo
+		/*	
 		_serviceInfra.set_unitOfWork(_unitOfWork);
 		_serviceInfra.AddInfraestructure(new MsReservaApplicationService());
 		
@@ -135,6 +133,5 @@ public class MsReservaInfraestructureApplication { //implements CommandLineRunne
 		
 		//----------------
 		*/
-	//  }
-
+	}
 }
