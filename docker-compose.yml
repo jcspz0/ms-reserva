@@ -23,7 +23,7 @@ services:
     restart: always
     environment:
       - ENV_MYSQL_HOST=ms-reserva-db
-      - ENV_MYSQL_PORT=3306
+      - ENV_MYSQL_PORT=3307
       - ENV_MYSQL_DB=jcdb
       - ENV_MYSQL_USER=jcspz0
       - ENV_MYSQL_PASS=juancarlos
@@ -39,12 +39,13 @@ services:
     image: mysql:8.0.29
     container_name: ms-reserva-db
     ports:
-      - 3306:3306
+      - 3307:3307
     environment:
       - MYSQL_ROOT_PASSWORD=passroot
       - MYSQL_DATABASE=jcdb
       - MYSQL_USER=jcspz0
       - MYSQL_PASSWORD=juancarlos
+      - MYSQL_TCP_PORT=3307
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:
