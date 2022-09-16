@@ -44,21 +44,7 @@ class RabbitMQConsumerTest {
 					new IntegrationDeudaVencida(UUID.randomUUID().toString())
 				)
 			);
-			consumerTest.reservaConfirmada(
-				Obj.writeValueAsString(
-					new IntegrationReservaConfirmada(
-						UUID.randomUUID().toString(),
-						UUID.randomUUID().toString(),
-						1,
-						1,
-						"Pruebas",
-						LocalDateTime.now().toString(),
-						"destino",
-						1,
-						UUID.randomUUID().toString()
-					)
-				)
-			);
+			//consumerTest.reservaConfirmada(Obj.writeValueAsString(new IntegrationReservaConfirmada(UUID.randomUUID().toString(), UUID.randomUUID().toString(), 1, 1, "Pruebas", LocalDateTime.now().toString(), "destino", 1, UUID.randomUUID().toString())));
 			consumerTest.reservaConfirmadaRollback(
 				Obj.writeValueAsString(
 					new IntegrationReservaConfirmadaRollback(
