@@ -73,7 +73,13 @@ class CrearReservaHandlerTest {
 		cantidadPasajeroTest = new CantidadPasajero(1);
 
 		vueloDTOTest =
-			new VueloDTO(UUID.randomUUID().toString(), 1, 1, "Santa");
+			new VueloDTO(
+				UUID.randomUUID().toString(),
+				"1",
+				1,
+				"santa",
+				"Santa"
+			);
 
 		reservaTest =
 			new Reserva(

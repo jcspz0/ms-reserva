@@ -7,6 +7,7 @@ import com.diplo.sharedkernel.integrationevents.IntegrationDeudaPagada;
 import com.diplo.sharedkernel.integrationevents.IntegrationDeudaVencida;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaConfirmada;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaConfirmadaRollback;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -25,35 +26,45 @@ class RabbitMQConsumerTest {
 	@InjectMocks
 	RabbitMQConsumer consumerTest;
 
+	ObjectMapper Obj = new ObjectMapper();
+
 	@Test
 	void testConsumers() {
 		try {
 			consumerTest.deudaPagada(
-				new IntegrationDeudaPagada(
-					UUID.randomUUID().toString(),
-					UUID.randomUUID().toString()
+				Obj.writeValueAsString(
+					new IntegrationDeudaPagada(
+						UUID.randomUUID().toString(),
+						UUID.randomUUID().toString()
+					)
 				)
 			);
 			consumerTest.deudaVencida(
-				new IntegrationDeudaVencida(UUID.randomUUID().toString())
+				Obj.writeValueAsString(
+					new IntegrationDeudaVencida(UUID.randomUUID().toString())
+				)
 			);
 			consumerTest.reservaConfirmada(
-				new IntegrationReservaConfirmada(
-					UUID.randomUUID().toString(),
-					UUID.randomUUID().toString(),
-					1,
-					1,
-					"Pruebas",
-					LocalDateTime.now().toString(),
-					"destino",
-					1,
-					UUID.randomUUID().toString()
+				Obj.writeValueAsString(
+					new IntegrationReservaConfirmada(
+						UUID.randomUUID().toString(),
+						UUID.randomUUID().toString(),
+						1,
+						1,
+						"Pruebas",
+						LocalDateTime.now().toString(),
+						"destino",
+						1,
+						UUID.randomUUID().toString()
+					)
 				)
 			);
 			consumerTest.reservaConfirmadaRollback(
-				new IntegrationReservaConfirmadaRollback(
-					UUID.randomUUID().toString(),
-					UUID.randomUUID().toString()
+				Obj.writeValueAsString(
+					new IntegrationReservaConfirmadaRollback(
+						UUID.randomUUID().toString(),
+						UUID.randomUUID().toString()
+					)
 				)
 			);
 			assertTrue(true);

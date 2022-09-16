@@ -5,6 +5,9 @@ import com.diplo.sharedkernel.amqp.IAmqpMessage;
 import com.diplo.sharedkernel.amqp.IAmqpProducer;
 import com.diplo.sharedkernel.event.IntegrationEvent;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaCreada;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.catalina.valves.rewrite.RewriteValve;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +19,8 @@ public class RabbitMQReservaCreadaSender
 
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
+
+	ObjectMapper Obj = new ObjectMapper();
 
 	/*	
 	@Value("reserva.crearreserva.exchange")
@@ -32,11 +37,24 @@ public class RabbitMQReservaCreadaSender
 		String routingkey
 	) {
 		//rabbitTemplate.convertAndSend(this.exchange, "", message.getMessage());
-		rabbitTemplate.convertAndSend(
-			exchange,
-			routingkey,
-			message.getMessage()
-		);
-		System.out.println("Send msg = " + message.getMessage());
+		//rabbitTemplate.convertAndSend(exchange, routingkey, message.getMessage());
+		try {
+			rabbitTemplate.convertAndSend(
+				exchange,
+				routingkey,
+				Obj.writeValueAsString(
+					(IntegrationReservaCreada) message.getMessage()
+				)
+			);
+			System.out.println(
+				"Send msg = " +
+				Obj.writeValueAsString(
+					(IntegrationReservaCreada) message.getMessage()
+				)
+			);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -12,6 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VueloEntityRepository
 	extends CrudRepository<VueloEntity, String> {
-	@Query(value = "SELECT * FROM vuelo WHERE destino = ?1", nativeQuery = true)
-	List<VueloEntity> GetVuelosByDestino(String destino);
+	@Query(
+		value = "SELECT * FROM vuelo WHERE origen = ?1 and destino = ?2",
+		nativeQuery = true
+	)
+	List<VueloEntity> GetVuelosByDestino(String origen, String destino);
 }

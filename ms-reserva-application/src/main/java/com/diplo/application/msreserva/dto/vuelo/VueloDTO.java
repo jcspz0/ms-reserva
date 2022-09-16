@@ -8,9 +8,10 @@ import java.util.UUID;
 public class VueloDTO {
 
 	private String VueloId;
-	private int NroVuelo;
+	private String NroVuelo;
 	private int CantidadAsientoDisponible;
 	private String Destino;
+	private String Origen;
 
 	public VueloDTO() {
 		super();
@@ -18,8 +19,9 @@ public class VueloDTO {
 
 	public VueloDTO(
 		String id,
-		int nroVuelo,
+		String nroVuelo,
 		int cantidadAsientoDisponible,
+		String origen,
 		String destino
 	) {
 		super();
@@ -27,17 +29,20 @@ public class VueloDTO {
 		NroVuelo = nroVuelo;
 		CantidadAsientoDisponible = cantidadAsientoDisponible;
 		Destino = destino;
+		Origen = origen;
 	}
 
 	public VueloDTO(
-		int nroVuelo,
+		String nroVuelo,
 		int cantidadAsientoDisponible,
+		String origen,
 		String destino
 	) {
 		super();
 		NroVuelo = nroVuelo;
 		CantidadAsientoDisponible = cantidadAsientoDisponible;
 		Destino = destino;
+		Origen = origen;
 	}
 
 	public VueloDTO(Vuelo aux) {
@@ -46,6 +51,7 @@ public class VueloDTO {
 		CantidadAsientoDisponible =
 			aux.getCantidadAsientoDisponible().getDisponibilidad();
 		Destino = aux.getDestino().getNombreDestino();
+		Origen = aux.getOrigen().getNombreOrigen();
 	}
 
 	public String getVueloId() {
@@ -56,11 +62,11 @@ public class VueloDTO {
 		VueloId = vueloId;
 	}
 
-	public int getNroVuelo() {
+	public String getNroVuelo() {
 		return NroVuelo;
 	}
 
-	public void setNroVuelo(int nroVuelo) {
+	public void setNroVuelo(String nroVuelo) {
 		NroVuelo = nroVuelo;
 	}
 
@@ -78,5 +84,13 @@ public class VueloDTO {
 
 	public void setDestino(String destino) {
 		Destino = destino;
+	}
+
+	public String getOrigen() {
+		return Origen;
+	}
+
+	public void setOrigen(String origen) {
+		Origen = origen;
 	}
 }

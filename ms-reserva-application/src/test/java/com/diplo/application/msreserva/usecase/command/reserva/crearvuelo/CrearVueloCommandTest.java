@@ -10,9 +10,10 @@ class CrearVueloCommandTest {
 	@Test
 	void CrearVueloCommand() {
 		String vueloId = UUID.randomUUID().toString();
-		int nroVuelo = 123;
+		String nroVuelo = "123";
 		int cantidadAsientoDisponible = 10;
 		String destino = "Santa";
+		String origen = "Santa";
 
 		CrearVueloCommand crearVueloCommand = new CrearVueloCommand();
 
@@ -22,6 +23,7 @@ class CrearVueloCommandTest {
 			cantidadAsientoDisponible
 		);
 		crearVueloCommand.setDestino(destino);
+		crearVueloCommand.setOrigen(origen);
 
 		assertEquals(vueloId, crearVueloCommand.getVueloId());
 		assertEquals(nroVuelo, crearVueloCommand.getNroVuelo());
@@ -30,12 +32,14 @@ class CrearVueloCommandTest {
 			crearVueloCommand.getCantidadAsientoDisponible()
 		);
 		assertEquals(destino, crearVueloCommand.getDestino());
+		assertEquals(origen, crearVueloCommand.getOrigen());
 
 		crearVueloCommand =
 			new CrearVueloCommand(
 				vueloId,
 				nroVuelo,
 				cantidadAsientoDisponible,
+				origen,
 				destino
 			);
 
@@ -46,5 +50,6 @@ class CrearVueloCommandTest {
 			crearVueloCommand.getCantidadAsientoDisponible()
 		);
 		assertEquals(destino, crearVueloCommand.getDestino());
+		assertEquals(origen, crearVueloCommand.getOrigen());
 	}
 }

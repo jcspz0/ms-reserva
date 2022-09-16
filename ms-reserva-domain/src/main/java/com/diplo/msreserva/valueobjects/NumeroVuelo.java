@@ -4,13 +4,13 @@ import com.diplo.sharedkernel.core.ValueObject;
 
 public final class NumeroVuelo extends ValueObject {
 
-	private final int Numero;
+	private final String Numero;
 
-	public int getNumero() {
+	public String getNumero() {
 		return Numero;
 	}
 
-	public NumeroVuelo(int numero) {
+	public NumeroVuelo(String numero) {
 		super();
 		Numero = numero;
 	}

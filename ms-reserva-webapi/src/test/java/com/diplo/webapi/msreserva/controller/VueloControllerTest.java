@@ -32,16 +32,17 @@ class VueloControllerTest {
 
 	VueloDTO vueloDTOTest;
 	String vueloIdTest;
-	int nroVueloTest;
+	String nroVueloTest;
 	int cantidadAsientoDisponibleTest;
 	String destinoTest;
+	String origenTest;
 
 	List<VueloDTO> listaVueloDTO;
 
 	@BeforeEach
 	void init() {
 		vueloIdTest = UUID.randomUUID().toString();
-		nroVueloTest = 1;
+		nroVueloTest = "1";
 		cantidadAsientoDisponibleTest = 10;
 		destinoTest = "Santa";
 
@@ -50,6 +51,7 @@ class VueloControllerTest {
 				vueloIdTest,
 				nroVueloTest,
 				cantidadAsientoDisponibleTest,
+				origenTest,
 				destinoTest
 			);
 
@@ -73,12 +75,14 @@ class VueloControllerTest {
 	@Test
 	void FindVueloByDestino() throws Exception {
 		String destinoAEncontrar = "Santa";
+		String origenAEncontrar = "LaPaz";
 		int cantidadEsperada = listaVueloDTO.size();
 
 		when(webApiServiceTest.getMediator().Send(any()))
 			.thenReturn(listaVueloDTO);
 
 		List<VueloDTO> resultado = vueloControllerTest.FindVueloByDestino(
+			origenAEncontrar,
 			destinoAEncontrar
 		);
 

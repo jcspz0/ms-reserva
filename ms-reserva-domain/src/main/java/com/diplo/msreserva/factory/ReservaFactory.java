@@ -47,7 +47,7 @@ public class ReservaFactory implements IReservaFactory {
 				objReserva.getVueloId().toString(),
 				objReserva.getCantidadPasajero().getCantidad(),
 				objReserva.getPasajeroId().toString(),
-				objReserva.getHora().toString(),
+				objReserva.getHora().getHora().toString(),
 				objReserva.getPrecio().getMonto()
 			),
 			objReserva.getHora().toString()

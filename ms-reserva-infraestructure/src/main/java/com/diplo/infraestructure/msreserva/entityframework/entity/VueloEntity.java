@@ -26,8 +26,9 @@ public class VueloEntity {
 	@Id
 	private String VueloId;
 
-	private int NroVuelo;
+	private String NroVuelo;
 	private int CantidadAsientoDisponible;
+	private String Origen;
 	private String Destino;
 
 	public VueloEntity() {}
@@ -39,6 +40,7 @@ public class VueloEntity {
 		CantidadAsientoDisponible =
 			aux.getCantidadAsientoDisponible().getDisponibilidad();
 		Destino = aux.getDestino().getNombreDestino();
+		Origen = aux.getOrigen().getNombreOrigen();
 	}
 
 	public String getVueloId() {
@@ -49,11 +51,11 @@ public class VueloEntity {
 		VueloId = vueloId;
 	}
 
-	public int getNroVuelo() {
+	public String getNroVuelo() {
 		return NroVuelo;
 	}
 
-	public void setNroVuelo(int nroVuelo) {
+	public void setNroVuelo(String nroVuelo) {
 		NroVuelo = nroVuelo;
 	}
 
@@ -71,5 +73,13 @@ public class VueloEntity {
 
 	public void setDestino(String destino) {
 		Destino = destino;
+	}
+
+	public String getOrigen() {
+		return Origen;
+	}
+
+	public void setOrigen(String origen) {
+		Origen = origen;
 	}
 }

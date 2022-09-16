@@ -16,6 +16,7 @@ import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.DocumentoIdentidad;
 import com.diplo.msreserva.valueobjects.NombreCompleto;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
@@ -41,6 +42,7 @@ class GetVueloByIdHandlerTest {
 	UUID vueloIdTest;
 	NumeroVuelo numeroVueloTest;
 	Destino _DestinoTest;
+	Origen origenTest;
 	AsientoDisponible cantidadAsientoDisponibleTest;
 
 	@BeforeEach
@@ -48,14 +50,16 @@ class GetVueloByIdHandlerTest {
 		getVueloByIdHandler = new GetVueloByIdHandler(_vueloRepositoryTest);
 
 		vueloIdTest = UUID.randomUUID();
-		numeroVueloTest = new NumeroVuelo(1);
+		numeroVueloTest = new NumeroVuelo("1");
 		_DestinoTest = new Destino("Santa");
+		origenTest = new Origen("Santa");
 		cantidadAsientoDisponibleTest = new AsientoDisponible(10);
 
 		vueloTest =
 			new Vuelo(
 				vueloIdTest,
 				numeroVueloTest,
+				origenTest,
 				_DestinoTest,
 				cantidadAsientoDisponibleTest
 			);

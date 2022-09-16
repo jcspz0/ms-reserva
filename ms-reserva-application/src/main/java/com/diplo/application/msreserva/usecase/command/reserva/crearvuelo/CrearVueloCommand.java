@@ -8,14 +8,16 @@ public class CrearVueloCommand implements IRequest<UUID> {
 	public CrearVueloCommand() {}
 
 	private String vueloId;
-	private int nroVuelo;
+	private String nroVuelo;
 	private int cantidadAsientoDisponible;
 	private String destino;
+	private String origen;
 
 	public CrearVueloCommand(
 		String vueloId,
-		int nroVuelo,
+		String nroVuelo,
 		int cantidadAsientoDisponible,
+		String origen,
 		String destino
 	) {
 		super();
@@ -23,24 +25,27 @@ public class CrearVueloCommand implements IRequest<UUID> {
 		this.nroVuelo = nroVuelo;
 		this.cantidadAsientoDisponible = cantidadAsientoDisponible;
 		this.destino = destino;
+		this.origen = origen;
 	}
 
 	public CrearVueloCommand(
-		int nroVuelo,
+		String nroVuelo,
 		int cantidadAsientoDisponible,
+		String origen,
 		String destino
 	) {
 		super();
 		this.nroVuelo = nroVuelo;
 		this.cantidadAsientoDisponible = cantidadAsientoDisponible;
 		this.destino = destino;
+		this.origen = origen;
 	}
 
-	public int getNroVuelo() {
+	public String getNroVuelo() {
 		return nroVuelo;
 	}
 
-	public void setNroVuelo(int nroVuelo) {
+	public void setNroVuelo(String nroVuelo) {
 		this.nroVuelo = nroVuelo;
 	}
 
@@ -66,5 +71,13 @@ public class CrearVueloCommand implements IRequest<UUID> {
 
 	public void setVueloId(String vueloId) {
 		this.vueloId = vueloId;
+	}
+
+	public String getOrigen() {
+		return origen;
+	}
+
+	public void setOrigen(String origen) {
+		this.origen = origen;
 	}
 }

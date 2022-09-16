@@ -24,15 +24,15 @@ public class crear_vuelo {
 	VueloDTO request;
 	VueloDTO response;
 
-	int nroVuelo;
+	String nroVuelo;
 	int asientos;
 	String destino;
 
 	@Given(
-		"Se crea el vuelo con el numero de vuelo {int}, cantidad de asientos disponibles {int} y el destino {string}"
+		"Se crea el vuelo con el numero de vuelo {string}, cantidad de asientos disponibles {int} y el destino {string}"
 	)
 	public void given(
-		int inputNroVuelo,
+		String inputNroVuelo,
 		int inputAsientos,
 		String inputDestino
 	) throws Throwable {
@@ -40,7 +40,13 @@ public class crear_vuelo {
 		asientos = inputAsientos;
 		destino = inputDestino;
 
-		request = new VueloDTO(inputNroVuelo, inputAsientos, inputDestino);
+		request =
+			new VueloDTO(
+				inputNroVuelo,
+				inputAsientos,
+				inputDestino,
+				inputDestino
+			);
 	}
 
 	@When("Crear el vuelo con los datos proporcionados")

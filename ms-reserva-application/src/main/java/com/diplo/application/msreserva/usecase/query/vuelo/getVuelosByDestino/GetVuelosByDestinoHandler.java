@@ -8,6 +8,7 @@ import com.diplo.msreserva.model.vuelo.Vuelo;
 import com.diplo.msreserva.repository.IReservaRepository;
 import com.diplo.msreserva.repository.IVueloRepository;
 import com.diplo.msreserva.valueobjects.Destino;
+import com.diplo.msreserva.valueobjects.Origen;
 import com.diplo.sharedkernel.mediator.request.IRequestHandler;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class GetVuelosByDestinoHandler
 	public Future<List<VueloDTO>> Handle(GetVuelosByDestinoQuery request) {
 		try {
 			CompletableFuture<List<Vuelo>> future = (CompletableFuture<List<Vuelo>>) _vueloRepository.GetVuelosByDestino(
+				new Origen(request.getOrigen()),
 				new Destino(request.getDestino())
 			);
 			List<Vuelo> auxListaVuelos = future.get();

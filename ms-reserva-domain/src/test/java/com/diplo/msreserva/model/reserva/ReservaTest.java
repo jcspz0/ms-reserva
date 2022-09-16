@@ -9,6 +9,7 @@ import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.Monto;
 import com.diplo.msreserva.valueobjects.NumeroReserva;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import com.diplo.sharedkernel.core.Constant;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,8 @@ class ReservaTest {
 	void RealizarReservaConDisponibilidad() throws Exception {
 		Vuelo vueloTest = new Vuelo(
 			UUID.randomUUID(),
-			new NumeroVuelo(1),
+			new NumeroVuelo("1"),
+			new Origen("Santa"),
 			new Destino("Santa"),
 			new AsientoDisponible(5)
 		);
@@ -41,7 +43,8 @@ class ReservaTest {
 	void NoRealizarReservaPorDisponibilidad() throws Exception {
 		Vuelo vueloTest = new Vuelo(
 			UUID.randomUUID(),
-			new NumeroVuelo(1),
+			new NumeroVuelo("1"),
+			new Origen("Santa"),
 			new Destino("Santa"),
 			new AsientoDisponible(5)
 		);
@@ -63,7 +66,8 @@ class ReservaTest {
 	void VencerReserva() throws Exception {
 		Vuelo vueloTest = new Vuelo(
 			UUID.randomUUID(),
-			new NumeroVuelo(1),
+			new NumeroVuelo("1"),
+			new Origen("Santa"),
 			new Destino("Santa"),
 			new AsientoDisponible(5)
 		);
@@ -85,7 +89,8 @@ class ReservaTest {
 	void VencerReservaConError() throws Exception {
 		Vuelo vueloTest = new Vuelo(
 			UUID.randomUUID(),
-			new NumeroVuelo(1),
+			new NumeroVuelo("1"),
+			new Origen("Santa"),
 			new Destino("Santa"),
 			new AsientoDisponible(5)
 		);
@@ -118,7 +123,8 @@ class ReservaTest {
 	void DeshacerConfirmacion() throws Exception {
 		Vuelo vueloTest = new Vuelo(
 			UUID.randomUUID(),
-			new NumeroVuelo(1),
+			new NumeroVuelo("1"),
+			new Origen("Santa"),
 			new Destino("Santa"),
 			new AsientoDisponible(5)
 		);
@@ -140,7 +146,8 @@ class ReservaTest {
 	void ConfirmarReserva() throws Exception {
 		Vuelo vueloTest = new Vuelo(
 			UUID.randomUUID(),
-			new NumeroVuelo(1),
+			new NumeroVuelo("1"),
+			new Origen("Santa"),
 			new Destino("Santa"),
 			new AsientoDisponible(5)
 		);
@@ -169,7 +176,8 @@ class ReservaTest {
 	void ConfirmarReservaConError() throws Exception {
 		Vuelo vueloTest = new Vuelo(
 			UUID.randomUUID(),
-			new NumeroVuelo(1),
+			new NumeroVuelo("1"),
+			new Origen("Santa"),
 			new Destino("Santa"),
 			new AsientoDisponible(5)
 		);

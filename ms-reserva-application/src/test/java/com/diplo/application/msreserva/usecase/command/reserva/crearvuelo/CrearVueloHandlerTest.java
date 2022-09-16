@@ -45,7 +45,7 @@ class CrearVueloHandlerTest {
 	@BeforeEach
 	void init() throws Exception {
 		vueloIdTest = UUID.randomUUID();
-		numeroVueloTest = new NumeroVuelo(1);
+		numeroVueloTest = new NumeroVuelo("1");
 		_DestinoTest = new Destino("destino");
 		cantidadAsientoDisponibleTest = new AsientoDisponible(10);
 

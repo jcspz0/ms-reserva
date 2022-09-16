@@ -44,15 +44,17 @@ public class realizar_reserva {
 	int nroDoc;
 	int tipoDoc;
 	String destino;
+	String origen;
 
 	Mono<List<VueloDTO>> resultadoRestVuelos;
 	List<VueloDTO> resultadoListVuelos;
 	boolean buscarpasajero;
 
 	@Given(
-		"dado el destino {string}, realizar la reserva al cliente {string} {string} {string} con idenficacion {int}, {int} con el precio de {double} y la cantidad de pasajeros {int}"
+		"dado el origen {string} y destino {string}, realizar la reserva al cliente {string} {string} {string} con idenficacion {int}, {int} con el precio de {double} y la cantidad de pasajeros {int}"
 	)
 	public void obtenerDatos(
+		String inputOrigen,
 		String inputDestino,
 		String inputNombre,
 		String inputPrimerApellido,
@@ -63,6 +65,7 @@ public class realizar_reserva {
 		int inputCantidadPasajero
 	) throws Throwable {
 		destino = inputDestino;
+		origen = inputOrigen;
 		nombre = inputNombre;
 		primerApellido = inputPrimerApellido;
 		segundoApellido = inputSegundoApellido;
@@ -79,7 +82,11 @@ public class realizar_reserva {
 		resultadoRestVuelos =
 			client
 				.get()
-				.uri("/vuelo/buscarvuelos?destino={destino}", destino)
+				.uri(
+					"/vuelo/buscarvuelos?origen={origen}&destino={destino}",
+					origen,
+					destino
+				)
 				.retrieve()
 				.onStatus(
 					httpStatus -> httpStatus.is4xxClientError(),
@@ -105,7 +112,10 @@ public class realizar_reserva {
 			resultadoRestVuelos.subscribe(resultado -> {});
 			resultadoListVuelos = resultadoRestVuelos.block();
 			for (VueloDTO vueloDTO : resultadoListVuelos) {
-				if (vueloDTO.getDestino().equalsIgnoreCase(destino)) {
+				if (
+					vueloDTO.getDestino().equalsIgnoreCase(destino) &&
+					vueloDTO.getOrigen().equalsIgnoreCase(origen)
+				) {
 					vueloId = vueloDTO.getVueloId();
 					break;
 				}

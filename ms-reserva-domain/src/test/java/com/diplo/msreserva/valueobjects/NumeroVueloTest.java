@@ -8,7 +8,7 @@ class NumeroVueloTest {
 
 	@Test
 	void crearNumeroVuelo() {
-		int numeroTest = 1;
+		String numeroTest = "1";
 		NumeroVuelo numeroVueloTest = new NumeroVuelo(numeroTest);
 
 		assertEquals(numeroTest, numeroVueloTest.getNumero());

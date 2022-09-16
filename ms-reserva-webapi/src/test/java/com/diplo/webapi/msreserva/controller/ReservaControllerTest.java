@@ -50,9 +50,10 @@ class ReservaControllerTest {
 
 	VueloDTO vueloDTOTest;
 
-	int nroVueloTest;
+	String nroVueloTest;
 	int cantidadAsientoDisponibleTest;
 	String destinoTest;
+	String origenTest;
 
 	@BeforeEach
 	void init() {
@@ -80,15 +81,17 @@ class ReservaControllerTest {
 		listaReservaDTO = new ArrayList();
 		listaReservaDTO.add(reservaDTOTest);
 
-		nroVueloTest = 1;
+		nroVueloTest = "1";
 		cantidadAsientoDisponibleTest = 10;
 		destinoTest = "Santa";
+		origenTest = "Santa";
 
 		vueloDTOTest =
 			new VueloDTO(
 				vueloIdTest,
 				nroVueloTest,
 				cantidadAsientoDisponibleTest,
+				origenTest,
 				destinoTest
 			);
 

@@ -17,6 +17,7 @@ import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.DocumentoIdentidad;
 import com.diplo.msreserva.valueobjects.NombreCompleto;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ class DbVueloRepositoryTest {
 	UUID vueloIdTest;
 	NumeroVuelo numeroVueloTest;
 	Destino _DestinoTest;
+	Origen _OrigenTest;
 	AsientoDisponible cantidadAsientoDisponibleTest;
 
 	Vuelo vueloTest;
@@ -58,14 +60,16 @@ class DbVueloRepositoryTest {
 	@BeforeEach
 	void init() throws Exception {
 		vueloIdTest = UUID.randomUUID();
-		numeroVueloTest = new NumeroVuelo(1);
+		numeroVueloTest = new NumeroVuelo("1");
 		_DestinoTest = new Destino("Santa");
+		_OrigenTest = new Origen("Santa");
 		cantidadAsientoDisponibleTest = new AsientoDisponible(10);
 
 		vueloTest =
 			new Vuelo(
 				vueloIdTest,
 				numeroVueloTest,
+				_OrigenTest,
 				_DestinoTest,
 				cantidadAsientoDisponibleTest
 			);
@@ -109,10 +113,11 @@ class DbVueloRepositoryTest {
 	@Test
 	void testGetVuelosByDestino()
 		throws InterruptedException, ExecutionException {
-		when(_databaseTest.GetVuelosByDestino(anyString()))
+		when(_databaseTest.GetVuelosByDestino(anyString(), anyString()))
 			.thenReturn(listaVueloTest);
 
 		Future<List<Vuelo>> resultado = dbVueloRepositoryTest.GetVuelosByDestino(
+			_OrigenTest,
 			_DestinoTest
 		);
 
