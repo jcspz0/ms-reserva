@@ -3,11 +3,13 @@ package com.diplo.infraestructure.msreserva.amqp;
 import com.diplo.application.msreserva.dto.reserva.ReservaDTO;
 import com.diplo.sharedkernel.amqp.IAmqpMessage;
 import com.diplo.sharedkernel.amqp.IAmqpProducer;
+import com.diplo.sharedkernel.amqp.MasstransitEvent;
 import com.diplo.sharedkernel.event.IntegrationEvent;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaConfirmada;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaCreada;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Arrays;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,11 @@ public class RabbitMQReservaConfirmadaSender
 	) {
 		//rabbitTemplate.convertAndSend(this.exchange, "", message.getMessage());
 		try {
+			MasstransitEvent masstransitEvent = new MasstransitEvent();
+			masstransitEvent.setMessageType(
+				Arrays.asList("urn:message:MasstransitConsumer:ReservaCreado")
+			);
+			masstransitEvent.setMessage(message.getMessage());
 			rabbitTemplate.convertAndSend(
 				exchange,
 				routingkey,
@@ -46,6 +53,7 @@ public class RabbitMQReservaConfirmadaSender
 					(IntegrationReservaConfirmada) message.getMessage()
 				)
 			);
+			//rabbitTemplate.convertAndSend(exchange, routingkey, Obj.writeValueAsString(masstransitEvent));
 			System.out.println(
 				"Send msg = " +
 				Obj.writeValueAsString(

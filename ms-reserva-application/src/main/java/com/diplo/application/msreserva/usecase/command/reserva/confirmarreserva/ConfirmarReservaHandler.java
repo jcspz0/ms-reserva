@@ -86,6 +86,7 @@ public class ConfirmarReservaHandler
 						pasajero.getNroDoc(),
 						nombreCompletoPasajero,
 						reserva.getHora().getHora().toString(),
+						vuelo.getOrigen(),
 						vuelo.getDestino(),
 						vuelo.getCantidadAsientoDisponible(),
 						request.getPagoId()
