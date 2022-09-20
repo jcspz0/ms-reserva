@@ -43,7 +43,7 @@ public class RabbitMQReservaConfirmadaSender
 		try {
 			MasstransitEvent masstransitEvent = new MasstransitEvent();
 			masstransitEvent.setMessageType(
-				Arrays.asList("urn:message:MasstransitConsumer:ReservaCreado")
+				Arrays.asList("urn:message:Shared.Models:ReservaCreado")
 			);
 			masstransitEvent.setMessage(message.getMessage());
 			rabbitTemplate.convertAndSend(

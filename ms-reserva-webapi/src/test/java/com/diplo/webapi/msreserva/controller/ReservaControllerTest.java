@@ -151,4 +151,21 @@ class ReservaControllerTest {
 			resultado.get(0).getReservaId()
 		);
 	}
+
+	@Test
+	void FindReservasParaVencer() throws Exception {
+		int cantidadEsperada = listaReservaDTO.size();
+
+		when(webApiServiceTest.getMediator().Send(any()))
+			.thenReturn(listaReservaDTO);
+
+		List<ReservaDTO> resultado = reservaControllerTest.FindReservasParaVencer();
+
+		assertNotNull(resultado);
+		assertEquals(cantidadEsperada, resultado.size());
+		assertEquals(
+			reservaDTOTest.getReservaId(),
+			resultado.get(0).getReservaId()
+		);
+	}
 }
