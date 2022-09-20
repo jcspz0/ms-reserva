@@ -1,3 +1,39 @@
+####
+FROM maven:3-openjdk-11-slim as builder
+WORKDIR /build
+
+COPY ./ms-sharekernel/pom.xml ./ms-sharekernel/pom.xml
+COPY ./ms-reserva-domain/pom.xml ./ms-reserva-domain/pom.xml
+COPY ./ms-reserva-application/pom.xml ./ms-reserva-application/pom.xml
+COPY ./ms-reserva-infraestructure/pom.xml ./ms-reserva-infraestructure/pom.xml
+COPY ./ms-reserva-webapi/pom.xml ./ms-reserva-webapi/pom.xml
+COPY ./pom.xml ./pom.xml
+
+RUN mvn -q -ntp -B -pl ms-sharekernel -am dependency:go-offline
+COPY ms-sharekernel ms-sharekernel
+RUN mvn -q -B -pl ms-sharekernel install
+
+RUN mvn -q -ntp -B -pl ms-reserva-domain -am dependency:go-offline
+COPY ms-reserva-domain ms-reserva-domain
+RUN mvn -q -B -pl ms-reserva-domain install
+
+RUN mvn -q -ntp -B -pl ms-reserva-application -am dependency:go-offline
+COPY ms-reserva-application ms-reserva-application
+RUN mvn -q -B -pl ms-reserva-application install
+
+RUN mvn -q -ntp -B -pl ms-reserva-infraestructure -am dependency:go-offline
+COPY ms-reserva-infraestructure ms-reserva-infraestructure
+RUN mvn -q -B -pl ms-reserva-infraestructure install
+
+RUN mvn -q -ntp -B -pl ms-reserva-webapi -am dependency:go-offline
+COPY ms-reserva-webapi ms-reserva-webapi
+RUN mvn -q -ntp -B -pl ms-sharekernel,ms-reserva-domain,ms-reserva-application,ms-reserva-infraestructure,ms-reserva-webapi package
+
+RUN mkdir -p /jar-layers
+WORKDIR /jar-layers
+RUN java -Djarmode=layertools -jar /build/ms-reserva-webapi/target/ms-reserva-webapi-0.0.1-exec.jar extract
+
+####
 FROM openjdk:18-alpine
 
 WORKDIR /app
@@ -9,9 +45,9 @@ COPY ./ms-reserva-infraestructure ./ms-reserva-infraestructure
 COPY ./ms-reserva-webapi ./ms-reserva-webapi
 COPY ./pom.xml ./pom.xml
 
-RUN wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz \
-&& tar -xvf apache-maven-3.6.3-bin.tar.gz && \
-mv apache-maven-3.6.3 /opt/
+#RUN wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz \
+#&& tar -xvf apache-maven-3.6.3-bin.tar.gz && \
+#mv apache-maven-3.6.3 /opt/
 
 ARG MYSQL_HOST=host.docker.internal
 ARG MYSQL_PORT=3306
@@ -39,10 +75,16 @@ ENV ENV_AMQP_PORT=${AMQP_PORT}
 ENV ENV_AMQP_USER=${AMQP_USER}
 ENV ENV_AMQP_PASS=${AMQP_PASS}
 
-RUN /opt/apache-maven-3.6.3/bin/mvn install
+#RUN /opt/apache-maven-3.6.3/bin/mvn install
 
-RUN cp /app/ms-reserva-webapi/target/ms-reserva-webapi-0.0.1-exec.jar /app/ms-reserva-webapi-0.0.1-exec.jar
+#RUN cp /app/ms-reserva-webapi/target/ms-reserva-webapi-0.0.1-exec.jar /app/ms-reserva-webapi-0.0.1-exec.jar
 
-CMD "java" "-jar" "ms-reserva-webapi-0.0.1-exec.jar"
+COPY --from=builder /jar-layers/dependencies/ ./
+COPY --from=builder /jar-layers/spring-boot-loader/ ./
+COPY --from=builder /jar-layers/snapshot-dependencies/ ./
+COPY --from=builder /jar-layers/application/ ./
+
+#CMD "java" "-jar" "ms-reserva-webapi-0.0.1-exec.jar"
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
 
 

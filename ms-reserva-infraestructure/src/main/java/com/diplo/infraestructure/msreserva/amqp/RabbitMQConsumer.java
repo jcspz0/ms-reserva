@@ -116,47 +116,38 @@ public class RabbitMQConsumer {
 			e.printStackTrace();
 		}
 	}
-
 	//----TEST
-
+	/*
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
-
+	
 	@RabbitListener(queues = "reserva.reservaconfirmada.checkin.crearcheckin")
 	public void reservaConfirmada(String event) {
+		
 		try {
+			
 			IntegrationReservaConfirmada message;
-			message =
-				mapper.readValue(event, IntegrationReservaConfirmada.class);
-
+			message = mapper.readValue(event, IntegrationReservaConfirmada.class);
+			
 			System.out.println("Recieved Message From RabbitMQ: " + event);
-			System.out.println(
-				"Recieved Message reservaConfirmada de la reserva " +
-				message.getReservaId()
-			);
+			System.out.println("Recieved Message reservaConfirmada de la reserva " + message.getReservaId());
 			//consumer.consume(new IntegrationEvent(message, null));
 			///--- Confirmacion de checkin
-			/*
+			
 			String exchange = "checkin.checkincreado.exchange";
 			String routinkey="checkin.chekincreado.pago.confirmarpago";
 			IntegrationCheckinCreado newEvent = new IntegrationCheckinCreado(message.getReservaId());
 			rabbitTemplate.convertAndSend(exchange, routinkey, mapper.writeValueAsString(newEvent));
 			System.out.println("Send msg = " + newEvent.getReservaId());
-			*/
+			
 			////--- Prueba de rollback
 			String exchange = "checkin.reservaconfirmadarollback.exchange";
-			String routinkey =
-				"checkin.reservaconfirmadarollback.reserva.reservaconfirmadarollback";
-			IntegrationReservaConfirmadaRollback newEvent = new IntegrationReservaConfirmadaRollback(
-				message.getReservaId(),
-				message.getPagoId()
-			);
-			rabbitTemplate.convertAndSend(
-				exchange,
-				routinkey,
-				mapper.writeValueAsString(newEvent)
-			);
+			String routinkey="checkin.reservaconfirmadarollback.reserva.reservaconfirmadarollback";
+			IntegrationReservaConfirmadaRollback newEvent = new IntegrationReservaConfirmadaRollback(message.getReservaId(), message.getPagoId());
+			rabbitTemplate.convertAndSend(exchange, routinkey, mapper.writeValueAsString(newEvent));
 			System.out.println("Send msg = " + newEvent.getReservaId());
+			
+	
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -164,7 +155,8 @@ public class RabbitMQConsumer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	//----
-
+	*/
 }
