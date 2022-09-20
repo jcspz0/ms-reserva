@@ -70,6 +70,8 @@ class GetVuelosByDestinoHandlerTest {
 
 		when(getVuelosByDestinoQueryTest.getDestino())
 			.thenReturn(_DestinoTest.getNombreDestino());
+		when(getVuelosByDestinoQueryTest.getOrigen())
+			.thenReturn(origenTest.getNombreOrigen());
 		when(_vueloRepositoryTest.GetVuelosByDestino(any(), any()))
 			.thenReturn(CompletableFuture.completedFuture(listaVueloTest));
 	}

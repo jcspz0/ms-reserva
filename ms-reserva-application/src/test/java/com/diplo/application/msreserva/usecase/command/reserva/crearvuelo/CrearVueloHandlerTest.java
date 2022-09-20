@@ -13,6 +13,7 @@ import com.diplo.msreserva.repository.IVueloRepository;
 import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -40,6 +41,7 @@ class CrearVueloHandlerTest {
 	UUID vueloIdTest;
 	NumeroVuelo numeroVueloTest;
 	Destino _DestinoTest;
+	Origen OrigenTest;
 	AsientoDisponible cantidadAsientoDisponibleTest;
 
 	@BeforeEach
@@ -47,6 +49,7 @@ class CrearVueloHandlerTest {
 		vueloIdTest = UUID.randomUUID();
 		numeroVueloTest = new NumeroVuelo("1");
 		_DestinoTest = new Destino("destino");
+		OrigenTest = new Origen("Santa");
 		cantidadAsientoDisponibleTest = new AsientoDisponible(10);
 
 		crearVueloHandlerTest =
@@ -56,6 +59,8 @@ class CrearVueloHandlerTest {
 			.thenReturn(numeroVueloTest.getNumero());
 		when(crearVueloCommandTest.getDestino())
 			.thenReturn(_DestinoTest.getNombreDestino());
+		when(crearVueloCommandTest.getOrigen())
+			.thenReturn(OrigenTest.getNombreOrigen());
 		when(crearVueloCommandTest.getCantidadAsientoDisponible())
 			.thenReturn(cantidadAsientoDisponibleTest.getDisponibilidad());
 	}
