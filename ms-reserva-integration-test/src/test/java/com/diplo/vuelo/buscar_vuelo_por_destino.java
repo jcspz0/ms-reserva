@@ -46,7 +46,11 @@ public class buscar_vuelo_por_destino {
 		resultadoRest =
 			client
 				.get()
-				.uri("/vuelo/buscarvuelos?destino={destino}", destino)
+				.uri(
+					"/vuelo/buscarvuelos?origen={destino}&destino={destino}",
+					destino,
+					destino
+				)
 				.retrieve()
 				.onStatus(
 					httpStatus -> httpStatus.is4xxClientError(),

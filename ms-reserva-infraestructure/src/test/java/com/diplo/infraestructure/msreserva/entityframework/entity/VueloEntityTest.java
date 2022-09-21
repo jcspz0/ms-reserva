@@ -10,14 +10,16 @@ class VueloEntityTest {
 	@Test
 	void VueloEntity() {
 		String VueloId = UUID.randomUUID().toString();
-		int NroVuelo = 123;
+		String NroVuelo = "123";
 		int CantidadAsientoDisponible = 1;
 		String Destino = "Santa";
+		String Origen = "Santa";
 		VueloEntity vueloEntity = new VueloEntity();
 		vueloEntity.setCantidadAsientoDisponible(CantidadAsientoDisponible);
 		vueloEntity.setDestino(Destino);
 		vueloEntity.setNroVuelo(NroVuelo);
 		vueloEntity.setVueloId(VueloId);
+		vueloEntity.setOrigen(Origen);
 
 		assertEquals(VueloId, vueloEntity.getVueloId());
 		assertEquals(NroVuelo, vueloEntity.getNroVuelo());
@@ -26,5 +28,6 @@ class VueloEntityTest {
 			vueloEntity.getCantidadAsientoDisponible()
 		);
 		assertEquals(Destino, vueloEntity.getDestino());
+		assertEquals(Origen, vueloEntity.getOrigen());
 	}
 }

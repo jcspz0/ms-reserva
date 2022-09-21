@@ -30,14 +30,14 @@ public class RabbitMQConfig {
 
 	@Bean
 	Queue reservaCreadaToPago() {
-		return new Queue("reserva.reservacreada.pago.creardeuda", false);
+		return new Queue("reserva.reservacreada.pago.creardeuda", true);
 	}
 
 	@Bean
 	Queue reservaConfirmadaToCheckin() {
 		return new Queue(
 			"reserva.reservaconfirmada.checkin.crearcheckin",
-			false
+			true
 		);
 	}
 
@@ -45,7 +45,7 @@ public class RabbitMQConfig {
 	Queue deudaPagadaRollbackToPago() {
 		return new Queue(
 			"reserva.deudapagadarollback.pago.deudapagadarollback",
-			false
+			true
 		);
 	}
 
@@ -121,7 +121,8 @@ public class RabbitMQConfig {
 		final RabbitTemplate rabbitTemplate = new RabbitTemplate(
 			connectionFactory
 		);
-		rabbitTemplate.setMessageConverter(jsonMessageConverter());
+		//rabbitTemplate.setMessageConverter(jsonMessageConverter());
+		rabbitTemplate.setMessageConverter(converter());
 		return rabbitTemplate;
 	}
 

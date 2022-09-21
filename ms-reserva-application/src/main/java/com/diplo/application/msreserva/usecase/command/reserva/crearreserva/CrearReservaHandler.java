@@ -9,6 +9,7 @@ import com.diplo.msreserva.repository.IUnitOfWork;
 import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import com.diplo.sharedkernel.mediator.request.IRequestHandler;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -59,6 +60,7 @@ public class CrearReservaHandler
 			Vuelo auxVuelo = new Vuelo(
 				UUID.fromString(request.getVuelo().getVueloId()),
 				new NumeroVuelo(request.getVuelo().getNroVuelo()),
+				new Origen(request.getVuelo().getOrigen()),
 				new Destino(request.getVuelo().getDestino()),
 				new AsientoDisponible(
 					request.getVuelo().getCantidadAsientoDisponible()

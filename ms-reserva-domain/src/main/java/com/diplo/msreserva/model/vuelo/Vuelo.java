@@ -4,6 +4,7 @@ import com.diplo.msreserva.event.DisponibilidadReducida;
 import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import com.diplo.sharedkernel.core.AggregateRoot;
 import java.util.UUID;
 
@@ -11,31 +12,36 @@ public class Vuelo extends AggregateRoot<UUID> {
 
 	private NumeroVuelo NroVuelo;
 	private AsientoDisponible CantidadAsientoDisponible;
-	private Destino _Destino;
+	private Destino Destino;
+	private Origen Origen;
 
 	public Vuelo(
 		NumeroVuelo numeroVuelo,
+		Origen _origen,
 		Destino _Destino,
 		AsientoDisponible cantidadAsientoDisponible
 	) {
 		super();
 		Id = UUID.randomUUID();
 		this.CantidadAsientoDisponible = cantidadAsientoDisponible;
-		this._Destino = _Destino;
+		this.Destino = _Destino;
 		this.NroVuelo = numeroVuelo;
+		this.Origen = _origen;
 	}
 
 	public Vuelo(
 		UUID vueloId,
 		NumeroVuelo numeroVuelo,
+		Origen _origen,
 		Destino _Destino,
 		AsientoDisponible cantidadAsientoDisponible
 	) {
 		super();
 		Id = vueloId;
 		this.CantidadAsientoDisponible = cantidadAsientoDisponible;
-		this._Destino = _Destino;
+		this.Destino = _Destino;
 		this.NroVuelo = numeroVuelo;
+		this.Origen = _origen;
 	}
 
 	public AsientoDisponible getCantidadAsientoDisponible() {
@@ -47,7 +53,11 @@ public class Vuelo extends AggregateRoot<UUID> {
 	}
 
 	public Destino getDestino() {
-		return _Destino;
+		return Destino;
+	}
+
+	public Origen getOrigen() {
+		return Origen;
 	}
 
 	public boolean ValidarDisponibilidad(int cantidad) {

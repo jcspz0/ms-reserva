@@ -9,10 +9,12 @@ import java.util.UUID;
 public class GetVuelosByDestinoQuery implements IRequest<List<VueloDTO>> {
 
 	private String Destino;
+	private String Origen;
 
-	public GetVuelosByDestinoQuery(String destino) {
+	public GetVuelosByDestinoQuery(String origen, String destino) {
 		super();
 		Destino = destino;
+		Origen = origen;
 	}
 
 	public GetVuelosByDestinoQuery() {}
@@ -23,5 +25,13 @@ public class GetVuelosByDestinoQuery implements IRequest<List<VueloDTO>> {
 
 	public void setDestino(String destino) {
 		Destino = destino;
+	}
+
+	public String getOrigen() {
+		return Origen;
+	}
+
+	public void setOrigen(String origen) {
+		Origen = origen;
 	}
 }

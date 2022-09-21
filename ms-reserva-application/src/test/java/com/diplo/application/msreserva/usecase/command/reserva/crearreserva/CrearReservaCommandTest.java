@@ -13,7 +13,7 @@ class CrearReservaCommandTest {
 		String reservaId = UUID.randomUUID().toString();
 		String nroReserva = "123";
 		String nroPasajero = UUID.randomUUID().toString();
-		VueloDTO vueloDTO = new VueloDTO(1, 1, "santa");
+		VueloDTO vueloDTO = new VueloDTO("1", 1, "santa", "santa");
 		double monto = 10;
 		int cantidadPasajero = 1;
 

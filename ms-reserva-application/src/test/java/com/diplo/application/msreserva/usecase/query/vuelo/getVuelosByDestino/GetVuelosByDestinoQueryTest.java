@@ -9,11 +9,14 @@ class GetVuelosByDestinoQueryTest {
 	@Test
 	void GetVuelosByDestinoQuery() {
 		String destino = "santa";
+		String origen = "lapaz";
 		GetVuelosByDestinoQuery getVuelosByDestinoQuery = new GetVuelosByDestinoQuery();
 		getVuelosByDestinoQuery.setDestino(destino);
+		getVuelosByDestinoQuery.setOrigen(origen);
 
-		getVuelosByDestinoQuery = new GetVuelosByDestinoQuery(destino);
+		getVuelosByDestinoQuery = new GetVuelosByDestinoQuery(origen, destino);
 
 		assertEquals(destino, getVuelosByDestinoQuery.getDestino());
+		assertEquals(origen, getVuelosByDestinoQuery.getOrigen());
 	}
 }

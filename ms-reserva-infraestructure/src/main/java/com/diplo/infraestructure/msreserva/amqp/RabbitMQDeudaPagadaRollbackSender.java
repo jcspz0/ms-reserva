@@ -7,6 +7,9 @@ import com.diplo.sharedkernel.event.IntegrationEvent;
 import com.diplo.sharedkernel.integrationevents.IntegrationDeudaPagadaRollback;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaConfirmada;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaCreada;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +22,8 @@ public class RabbitMQDeudaPagadaRollbackSender
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 
+	ObjectMapper Obj = new ObjectMapper();
+
 	@Override
 	public void sendMessage(
 		IAmqpMessage message,
@@ -27,11 +32,23 @@ public class RabbitMQDeudaPagadaRollbackSender
 		String routingkey
 	) {
 		//rabbitTemplate.convertAndSend(this.exchange, "", message.getMessage());
-		rabbitTemplate.convertAndSend(
-			exchange,
-			routingkey,
-			message.getMessage()
-		);
-		System.out.println("Send msg = " + message.getMessage());
+		try {
+			rabbitTemplate.convertAndSend(
+				exchange,
+				routingkey,
+				Obj.writeValueAsString(
+					(IntegrationDeudaPagadaRollback) message.getMessage()
+				)
+			);
+			System.out.println(
+				"Send msg = " +
+				Obj.writeValueAsString(
+					(IntegrationDeudaPagadaRollback) message.getMessage()
+				)
+			);
+		} catch (AmqpException | JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -15,6 +15,7 @@ import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NombreCompleto;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import com.diplo.sharedkernel.mediator.Mediator;
 import com.diplo.sharedkernel.mediator.request.IRequest;
 import com.diplo.sharedkernel.mediator.request.IRequestHandler;
@@ -46,6 +47,7 @@ class MediatorTest {
 	UUID vueloIdTest;
 	NumeroVuelo numeroVueloTest;
 	Destino _DestinoTest;
+	Origen OrigenTest;
 	AsientoDisponible cantidadAsientoDisponibleTest;
 
 	IRequestHandler requestHandler;
@@ -53,8 +55,9 @@ class MediatorTest {
 	@BeforeEach
 	void init() throws Exception {
 		vueloIdTest = UUID.randomUUID();
-		numeroVueloTest = new NumeroVuelo(1);
+		numeroVueloTest = new NumeroVuelo("1");
 		_DestinoTest = new Destino("destino");
+		OrigenTest = new Origen("santa");
 		cantidadAsientoDisponibleTest = new AsientoDisponible(10);
 
 		crearVueloHandlerTest =
@@ -66,6 +69,8 @@ class MediatorTest {
 			.thenReturn(numeroVueloTest.getNumero());
 		when(crearVueloCommandTest.getDestino())
 			.thenReturn(_DestinoTest.getNombreDestino());
+		when(crearVueloCommandTest.getOrigen())
+			.thenReturn(OrigenTest.getNombreOrigen());
 		when(crearVueloCommandTest.getCantidadAsientoDisponible())
 			.thenReturn(cantidadAsientoDisponibleTest.getDisponibilidad());
 	}

@@ -50,9 +50,10 @@ class ReservaControllerTest {
 
 	VueloDTO vueloDTOTest;
 
-	int nroVueloTest;
+	String nroVueloTest;
 	int cantidadAsientoDisponibleTest;
 	String destinoTest;
+	String origenTest;
 
 	@BeforeEach
 	void init() {
@@ -80,15 +81,17 @@ class ReservaControllerTest {
 		listaReservaDTO = new ArrayList();
 		listaReservaDTO.add(reservaDTOTest);
 
-		nroVueloTest = 1;
+		nroVueloTest = "1";
 		cantidadAsientoDisponibleTest = 10;
 		destinoTest = "Santa";
+		origenTest = "Santa";
 
 		vueloDTOTest =
 			new VueloDTO(
 				vueloIdTest,
 				nroVueloTest,
 				cantidadAsientoDisponibleTest,
+				origenTest,
 				destinoTest
 			);
 
@@ -140,6 +143,23 @@ class ReservaControllerTest {
 		List<ReservaDTO> resultado = reservaControllerTest.FindReservasByHoraAndEstado(
 			hora
 		);
+
+		assertNotNull(resultado);
+		assertEquals(cantidadEsperada, resultado.size());
+		assertEquals(
+			reservaDTOTest.getReservaId(),
+			resultado.get(0).getReservaId()
+		);
+	}
+
+	@Test
+	void FindReservasParaVencer() throws Exception {
+		int cantidadEsperada = listaReservaDTO.size();
+
+		when(webApiServiceTest.getMediator().Send(any()))
+			.thenReturn(listaReservaDTO);
+
+		List<ReservaDTO> resultado = reservaControllerTest.FindReservasParaVencer();
 
 		assertNotNull(resultado);
 		assertEquals(cantidadEsperada, resultado.size());

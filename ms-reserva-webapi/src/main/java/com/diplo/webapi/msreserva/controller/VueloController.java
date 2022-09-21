@@ -42,6 +42,7 @@ public class VueloController {
 						new CrearVueloCommand(
 							vueloDTO.getNroVuelo(),
 							vueloDTO.getCantidadAsientoDisponible(),
+							vueloDTO.getOrigen(),
 							vueloDTO.getDestino()
 						)
 					);
@@ -49,6 +50,7 @@ public class VueloController {
 				vueloId.toString(),
 				vueloDTO.getNroVuelo(),
 				vueloDTO.getCantidadAsientoDisponible(),
+				vueloDTO.getOrigen(),
 				vueloDTO.getDestino()
 			);
 			return result;
@@ -59,12 +61,15 @@ public class VueloController {
 	}
 
 	@RequestMapping(value = "/buscarvuelos", method = RequestMethod.GET)
-	public List<VueloDTO> FindVueloByDestino(@RequestParam String destino) {
+	public List<VueloDTO> FindVueloByDestino(
+		@RequestParam String origen,
+		@RequestParam String destino
+	) {
 		List<VueloDTO> listadoDTO = null;
 		try {
 			listadoDTO =
 				this._vueloService.getMediator()
-					.Send(new GetVuelosByDestinoQuery(destino));
+					.Send(new GetVuelosByDestinoQuery(origen, destino));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

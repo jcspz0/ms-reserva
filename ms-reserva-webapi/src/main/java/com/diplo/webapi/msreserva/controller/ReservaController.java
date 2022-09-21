@@ -10,10 +10,12 @@ import com.diplo.application.msreserva.usecase.query.vuelo.getVuelosByDestino.Ge
 import com.diplo.infraestructure.msreserva.amqp.RabbitMQReservaCreadaSender;
 import com.diplo.infraestructure.msreserva.memoryrepository.MemoryReservaRepository;
 import com.diplo.msreserva.model.vuelo.Vuelo;
+import com.diplo.sharedkernel.core.Constant;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaCreada;
 import com.diplo.sharedkernel.mediator.IMediator;
 import com.diplo.webapi.msreserva.service.MsReservaWebApiService;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +130,43 @@ public class ReservaController {
 			listadoDTO =
 				this._reservaService.getMediator()
 					.Send(new GetReservasByHoraAndEstadoQuery(hora, "CREADA"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (listadoDTO == null) {
+				throw new ResponseStatusException(
+					HttpStatus.NOT_FOUND,
+					"entity not found"
+				);
+			}
+		}
+		return listadoDTO;
+	}
+
+	@RequestMapping(
+		value = "/buscarreservasparavencer",
+		method = RequestMethod.GET
+	)
+	public List<ReservaDTO> FindReservasParaVencer() {
+		//String str = "2016-03-04 11:30";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+			"yyyy-MM-dd HH:mm:ss"
+		);
+		LocalDateTime dateTime = LocalDateTime.now();
+		System.out.println("Hora actual " + dateTime.format(formatter));
+		dateTime = dateTime.minusHours(2);
+		System.out.println("Hora nueva " + dateTime.format(formatter));
+		List<ReservaDTO> listadoDTO = null;
+		try {
+			listadoDTO =
+				this._reservaService.getMediator()
+					.Send(
+						new GetReservasByHoraAndEstadoQuery(
+							dateTime.format(formatter),
+							Constant.RESERVAESTADOCREADA
+						)
+					);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -12,6 +12,7 @@ import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.CantidadPasajero;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import com.diplo.sharedkernel.core.Constant;
 import com.diplo.sharedkernel.event.DomainEvent;
 import com.diplo.sharedkernel.event.IntegrationEvent;
@@ -53,6 +54,7 @@ public class DbVueloRepository
 			Vuelo result = new Vuelo(
 				UUID.fromString(aux.getVueloId()),
 				new NumeroVuelo(aux.getNroVuelo()),
+				new Origen(aux.getOrigen()),
 				new Destino(aux.getDestino()),
 				new AsientoDisponible(aux.getCantidadAsientoDisponible())
 			);
@@ -86,10 +88,14 @@ public class DbVueloRepository
 	}
 
 	@Override
-	public Future<List<Vuelo>> GetVuelosByDestino(Destino destino) {
+	public Future<List<Vuelo>> GetVuelosByDestino(
+		Origen origen,
+		Destino destino
+	) {
 		System.out.println("GetVuelosByDestino DBRepository");
 		try {
 			List<VueloEntity> aux = _database.GetVuelosByDestino(
+				origen.getNombreOrigen(),
 				destino.getNombreDestino()
 			);
 			List<Vuelo> listaVuelos = new ArrayList<Vuelo>();
@@ -98,6 +104,7 @@ public class DbVueloRepository
 					new Vuelo(
 						UUID.fromString(auxlist.getVueloId()),
 						new NumeroVuelo(auxlist.getNroVuelo()),
+						new Origen(auxlist.getOrigen()),
 						new Destino(auxlist.getDestino()),
 						new AsientoDisponible(
 							auxlist.getCantidadAsientoDisponible()

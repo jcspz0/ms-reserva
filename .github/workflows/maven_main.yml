@@ -1,12 +1,11 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI rama main
+name: Staging deployment
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
+    types: [opened, reopened]
     branches: [ "main" ]
 
 jobs:
@@ -26,3 +25,36 @@ jobs:
       run: mvn clean install -Dmaven.test.skip
     - name: Ejecucion de pruebas
       run: mvn surefire:test
+
+  staging:
+    needs: build
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+          SSH_HOST: ${{ secrets.HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+            Host staging
+              HostName $SSH_HOST
+              User $SSH_USER
+              IdentityFile ~/.ssh/staging.key
+              StrictHostKeyChecking no
+          END
+      - name: Stop the server
+        run: ssh staging 'cd /diplo/ms-reserva/ && docker-compose down'
+
+      - name: Do deploy
+        run: ssh staging 'cd /diplo/ && sh update-reserva.sh'
+        
+      - name: Start the server
+        if: ${{ always() }}
+        run: ssh staging 'cd /diplo/ms-reserva/ && docker-compose up --build -d'

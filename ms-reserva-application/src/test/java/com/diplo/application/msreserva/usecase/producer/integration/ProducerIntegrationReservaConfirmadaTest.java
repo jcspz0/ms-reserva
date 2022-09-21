@@ -35,6 +35,7 @@ class ProducerIntegrationReservaConfirmadaTest {
 				"prueba",
 				LocalDateTime.now().toString(),
 				"santa",
+				"santa",
 				1,
 				UUID.randomUUID().toString()
 			)

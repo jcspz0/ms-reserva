@@ -10,6 +10,7 @@ import com.diplo.msreserva.repository.IVueloRepository;
 import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
@@ -34,17 +35,19 @@ class ReducirDisponibilidadHandlerTest {
 	@Test
 	void testReducirDisponibilidadHandler() {
 		try {
-			NumeroVuelo NroVuelo = new NumeroVuelo(1);
+			NumeroVuelo NroVuelo = new NumeroVuelo("1");
 			AsientoDisponible CantidadAsientoDisponible = new AsientoDisponible(
 				1
 			);
 			Destino _Destino;
 			_Destino = new Destino("santa");
+			Origen _Origen = new Origen("santa");
 			UUID vueloId = UUID.randomUUID();
 			int cantidadPasajero = 1;
 			Vuelo vueloTest = new Vuelo(
 				vueloId,
 				NroVuelo,
+				_Origen,
 				_Destino,
 				CantidadAsientoDisponible
 			);

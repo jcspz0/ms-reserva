@@ -77,7 +77,13 @@ class ConfirmarReservaHandlerTest {
 					"segundo"
 				);
 			vueloTest =
-				new VueloDTO(UUID.randomUUID().toString(), 123, 1, "santa");
+				new VueloDTO(
+					UUID.randomUUID().toString(),
+					"123",
+					1,
+					"santa",
+					"santa"
+				);
 			Monto precioTest = new Monto(10);
 			CantidadPasajero cantidadPasajeroTest = new CantidadPasajero(1);
 			Reserva reservaTest = new Reserva(

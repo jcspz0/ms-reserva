@@ -11,6 +11,7 @@ import com.diplo.msreserva.repository.IVueloRepository;
 import com.diplo.msreserva.valueobjects.AsientoDisponible;
 import com.diplo.msreserva.valueobjects.Destino;
 import com.diplo.msreserva.valueobjects.NumeroVuelo;
+import com.diplo.msreserva.valueobjects.Origen;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +40,7 @@ class GetVuelosByDestinoHandlerTest {
 	UUID vueloIdTest;
 	NumeroVuelo numeroVueloTest;
 	Destino _DestinoTest;
+	Origen origenTest;
 	AsientoDisponible cantidadAsientoDisponibleTest;
 
 	GetVuelosByDestinoHandler getVuelosByDestinoHandlerTest;
@@ -49,14 +51,16 @@ class GetVuelosByDestinoHandlerTest {
 			new GetVuelosByDestinoHandler(_vueloRepositoryTest);
 
 		vueloIdTest = UUID.randomUUID();
-		numeroVueloTest = new NumeroVuelo(1);
+		numeroVueloTest = new NumeroVuelo("1");
 		_DestinoTest = new Destino("Santa");
+		origenTest = new Origen("Santa");
 		cantidadAsientoDisponibleTest = new AsientoDisponible(10);
 
 		vueloTest =
 			new Vuelo(
 				vueloIdTest,
 				numeroVueloTest,
+				origenTest,
 				_DestinoTest,
 				cantidadAsientoDisponibleTest
 			);
@@ -66,7 +70,9 @@ class GetVuelosByDestinoHandlerTest {
 
 		when(getVuelosByDestinoQueryTest.getDestino())
 			.thenReturn(_DestinoTest.getNombreDestino());
-		when(_vueloRepositoryTest.GetVuelosByDestino(any()))
+		when(getVuelosByDestinoQueryTest.getOrigen())
+			.thenReturn(origenTest.getNombreOrigen());
+		when(_vueloRepositoryTest.GetVuelosByDestino(any(), any()))
 			.thenReturn(CompletableFuture.completedFuture(listaVueloTest));
 	}
 
