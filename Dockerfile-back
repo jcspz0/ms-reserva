@@ -26,6 +26,10 @@ RUN mvn -q -ntp -B -pl ms-reserva-infraestructure -am dependency:go-offline
 COPY ms-reserva-infraestructure ms-reserva-infraestructure
 RUN mvn -q -B -pl ms-reserva-infraestructure install
 
+RUN mvn -q -ntp -B -pl ms-reserva-webapi -am dependency:go-offline
+COPY ms-reserva-webapi ms-reserva-webapi
+RUN mvn -q -B -pl ms-reserva-webapi install
+
 RUN mvn -q -ntp -B -pl report-aggregate-module -am dependency:go-offline
 COPY report-aggregate-module report-aggregate-module
 RUN mvn -q -B -pl report-aggregate-module install
