@@ -10,6 +10,7 @@ import com.diplo.sharedkernel.integrationevents.IntegrationReservaCreada;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
+import java.util.HashMap;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,17 +44,33 @@ public class RabbitMQReservaConfirmadaSender
 		try {
 			MasstransitEvent masstransitEvent = new MasstransitEvent();
 			masstransitEvent.setMessageType(
-				Arrays.asList("urn:message:Shared.Models:ReservaCreado")
+				Arrays.asList(
+					"urn:message:ShareKernel.IntegrationEvents:ReservaCreado"
+				)
 			);
-			masstransitEvent.setMessage(message.getMessage());
+			IntegrationReservaConfirmada data = (IntegrationReservaConfirmada) message.getMessage();
+			HashMap<String, Object> mapData = new HashMap<>();
+			mapData.put("reservaId", data.getReservaId());
+			mapData.put("cantidadPasajeros", data.getCantidadPasajeros());
+			mapData.put("hora", data.getHora());
+			mapData.put("vueloId", data.getVueloId());
+			mapData.put("destino", data.getDestino());
+			mapData.put("origen", data.getOrigen());
+			mapData.put("nroDoc", data.getNroDoc());
+			mapData.put("tipoDoc", data.getTipoDoc());
+			mapData.put(
+				"nombreCompletoPasajero",
+				data.getNombreCompletoPasajero()
+			);
+			mapData.put("pagoId", data.getPagoId());
+
+			masstransitEvent.setMessage(mapData);
+			//rabbitTemplate.convertAndSend(exchange, routingkey, Obj.writeValueAsString((IntegrationReservaConfirmada) message.getMessage()));
 			rabbitTemplate.convertAndSend(
 				exchange,
 				routingkey,
-				Obj.writeValueAsString(
-					(IntegrationReservaConfirmada) message.getMessage()
-				)
+				Obj.writeValueAsString(masstransitEvent)
 			);
-			//rabbitTemplate.convertAndSend(exchange, routingkey, Obj.writeValueAsString(masstransitEvent));
 			System.out.println(
 				"Send msg = " +
 				Obj.writeValueAsString(
