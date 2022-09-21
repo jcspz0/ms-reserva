@@ -32,7 +32,7 @@ public class ProducerIntegrationReservaConfirmada
 	@EventListener
 	public void onProcessEvent(IntegrationReservaConfirmada event) {
 		System.out.println(
-			"ProducerIntegrationReservaCreada, llego evento de integracion " +
+			"ProducerIntegrationReservaConfirmada, llego evento de integracion " +
 			event
 		);
 		amqp.sendMessage(
