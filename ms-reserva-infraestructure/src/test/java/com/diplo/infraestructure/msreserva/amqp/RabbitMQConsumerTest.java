@@ -2,6 +2,7 @@ package com.diplo.infraestructure.msreserva.amqp;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.diplo.sharedkernel.amqp.MasstransitEvent;
 import com.diplo.sharedkernel.event.IListenerIntegrationConsumer;
 import com.diplo.sharedkernel.integrationevents.IntegrationDeudaPagada;
 import com.diplo.sharedkernel.integrationevents.IntegrationDeudaVencida;
@@ -9,6 +10,7 @@ import com.diplo.sharedkernel.integrationevents.IntegrationReservaConfirmada;
 import com.diplo.sharedkernel.integrationevents.IntegrationReservaConfirmadaRollback;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,14 +47,15 @@ class RabbitMQConsumerTest {
 				)
 			);
 			//consumerTest.reservaConfirmada(Obj.writeValueAsString(new IntegrationReservaConfirmada(UUID.randomUUID().toString(), UUID.randomUUID().toString(), 1, 1, "Pruebas", LocalDateTime.now().toString(), "destino", 1, UUID.randomUUID().toString())));
+			MasstransitEvent masstransit = new MasstransitEvent();
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("reservaId", UUID.randomUUID().toString());
+			map.put("pagoId", UUID.randomUUID().toString());
+			masstransit.setMessage(map);
 			consumerTest.reservaConfirmadaRollback(
-				Obj.writeValueAsString(
-					new IntegrationReservaConfirmadaRollback(
-						UUID.randomUUID().toString(),
-						UUID.randomUUID().toString()
-					)
-				)
+				Obj.writeValueAsString(masstransit)
 			);
+
 			assertTrue(true);
 		} catch (Exception e) {
 			// TODO: handle exception

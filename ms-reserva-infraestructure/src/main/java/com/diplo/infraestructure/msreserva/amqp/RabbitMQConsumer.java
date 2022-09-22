@@ -1,5 +1,6 @@
 package com.diplo.infraestructure.msreserva.amqp;
 
+import com.diplo.sharedkernel.amqp.MasstransitEvent;
 import com.diplo.sharedkernel.event.IListenerIntegrationConsumer;
 import com.diplo.sharedkernel.event.IntegrationEvent;
 import com.diplo.sharedkernel.integrationevents.IntegrationCheckinCreado;
@@ -12,6 +13,7 @@ import com.diplo.sharedkernel.integrationevents.IntegrationVueloCreado;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -65,22 +67,35 @@ public class RabbitMQConsumer {
 		}
 	}
 
+	//@RabbitListener(queues = "checkin.reservaconfirmadarollback.reserva.reservaconfirmadarollback")
 	@RabbitListener(
-		queues = "checkin.reservaconfirmadarollback.reserva.reservaconfirmadarollback"
+		queues = "IntegrationReservaConfirmadaRollback-creado-aeropuertojsa"
 	)
 	public void reservaConfirmadaRollback(String event) {
-		IntegrationReservaConfirmadaRollback message;
 		try {
-			message =
-				mapper.readValue(
-					event,
-					IntegrationReservaConfirmadaRollback.class
-				);
-			System.out.println("Recieved Message From RabbitMQ: " + event);
-			System.out.println(
-				"Recieved Message reservaConfirmadaRollback de la reserva " +
-				message.getReservaId()
+			MasstransitEvent masstransitEvent = mapper.readValue(
+				event,
+				MasstransitEvent.class
 			);
+			System.out.println(
+				"Recieved Message From RabbitMQ: " +
+				masstransitEvent.getMessage()
+			);
+			Map<String, Object> messageMap = masstransitEvent.getMessage();
+			System.out.println(
+				"Recieved Message From RabbitMQ: reservaId " +
+				messageMap.get("reservaId")
+			);
+			System.out.println(
+				"Recieved Message From RabbitMQ: pagoId " +
+				messageMap.get("pagoId")
+			);
+			IntegrationReservaConfirmadaRollback message = new IntegrationReservaConfirmadaRollback(
+				(String) messageMap.get("reservaId"),
+				(String) messageMap.get("pagoId")
+			);
+			System.out.println("Recieved Message From RabbitMQ: " + message);
+			//System.out.println("Recieved Message reservaConfirmadaRollback de la reserva " + message.getReservaId());
 			consumer.consume(new IntegrationEvent(message, null));
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
