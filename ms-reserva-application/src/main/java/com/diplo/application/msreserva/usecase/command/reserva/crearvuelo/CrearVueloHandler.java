@@ -36,7 +36,7 @@ public class CrearVueloHandler
 	public Future<UUID> Handle(CrearVueloCommand request) {
 		try {
 			Vuelo objVuelo = new Vuelo(
-				UUID.randomUUID(),
+				UUID.fromString(request.getVueloId()),
 				new NumeroVuelo(request.getNroVuelo()),
 				new Origen(request.getOrigen()),
 				new Destino(request.getDestino()),
