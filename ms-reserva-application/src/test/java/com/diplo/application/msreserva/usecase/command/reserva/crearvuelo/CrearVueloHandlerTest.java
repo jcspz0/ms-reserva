@@ -55,6 +55,8 @@ class CrearVueloHandlerTest {
 		crearVueloHandlerTest =
 			new CrearVueloHandler(_vueloRepository, _unitOfWork);
 
+		when(crearVueloCommandTest.getVueloId())
+			.thenReturn(vueloIdTest.toString());
 		when(crearVueloCommandTest.getNroVuelo())
 			.thenReturn(numeroVueloTest.getNumero());
 		when(crearVueloCommandTest.getDestino())
