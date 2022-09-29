@@ -61,6 +61,7 @@ public class RealizarReservaWeb {
 	int nroDoc;
 	int tipoDoc;
 	String destino;
+	String origen;
 
 	Mono<List<VueloDTO>> resultadoRestVuelos;
 	List<VueloDTO> resultadoListVuelos;
@@ -88,9 +89,10 @@ public class RealizarReservaWeb {
 	}
 
 	@Given(
-		"con el destino {string}, realizar la reserva al cliente {string} {string} {string} con idenficacion {int}, {int} con el precio de {double} y la cantidad de pasajeros {int}"
+		"con el origen {string} y el destino {string}, realizar la reserva al cliente {string} {string} {string} con idenficacion {int}, {int} con el precio de {double} y la cantidad de pasajeros {int}"
 	)
 	public void obtenerDatosParaWeb(
+		String inputOrigen,
 		String inputDestino,
 		String inputNombre,
 		String inputPrimerApellido,
@@ -101,6 +103,7 @@ public class RealizarReservaWeb {
 		int inputCantidadPasajero
 	) throws Throwable {
 		destino = inputDestino;
+		origen = inputOrigen;
 		nombre = inputNombre;
 		primerApellido = inputPrimerApellido;
 		segundoApellido = inputSegundoApellido;
@@ -116,10 +119,13 @@ public class RealizarReservaWeb {
 
 	@When("buscar vuelos para el destino solicitado en la web")
 	public void cargarDatosVueloParaWeb() throws Throwable {
-		driver.get("http://localhost:5000/vuelo");
+		//driver.get("http://localhost:5000/vuelo");
+		driver.get("http://localhost:4200/modulos/reserva/vuelo");
 		// Thread.sleep(2000);
-		WebElement searchBox = driver.findElement(By.id("destino"));
-		searchBox.sendKeys(destino);
+		WebElement searchBoxOrigen = driver.findElement(By.id("origen"));
+		searchBoxOrigen.sendKeys(origen);
+		WebElement searchBoxDestino = driver.findElement(By.id("destino"));
+		searchBoxDestino.sendKeys(destino);
 		Thread.sleep(2000);
 		WebElement botonBuscarVuelo = driver.findElement(
 			By.id("botonBuscarVuelo")
@@ -152,8 +158,9 @@ public class RealizarReservaWeb {
 	@And("obtener identificador del pasajero en el sistema en la web")
 	public void cargarDatosPasajero() throws InterruptedException {
 		if (vueloEncontrado) {
+			//WebElement ventanapasajero = driver.findElement(By.id("paginapasajero"));
 			WebElement ventanapasajero = driver.findElement(
-				By.id("paginapasajero")
+				By.linkText("gestion de pasajero")
 			);
 			ventanapasajero.click();
 			Thread.sleep(2000);
@@ -166,8 +173,9 @@ public class RealizarReservaWeb {
 				By.id("inputbuscartipodoc")
 			);
 			buscartipodoc.click();
+			//WebElement seleccionartipodoc = driver.findElement(By.id("tipodoc"+tipoDoc));
 			WebElement seleccionartipodoc = driver.findElement(
-				By.id("tipodoc" + tipoDoc)
+				By.id("nb-option-" + (tipoDoc - 1))
 			);
 			seleccionartipodoc.click();
 			//---------
@@ -217,8 +225,9 @@ public class RealizarReservaWeb {
 					By.id("inputcreartipodocvalue")
 				);
 				inputcreartipodocvalue.click();
+				//WebElement creartipodoc = driver.findElement(By.id("creartipodoc"+tipoDoc));
 				WebElement creartipodoc = driver.findElement(
-					By.id("creartipodoc" + tipoDoc)
+					By.id("nb-option-" + (tipoDoc + 1))
 				);
 				creartipodoc.click();
 				//-------------------
@@ -247,8 +256,9 @@ public class RealizarReservaWeb {
 				//------------
 				buscartipodoc = driver.findElement(By.id("inputbuscartipodoc"));
 				buscartipodoc.click();
+				//seleccionartipodoc = driver.findElement(By.id("tipodoc"+tipoDoc));
 				seleccionartipodoc =
-					driver.findElement(By.id("tipodoc" + tipoDoc));
+					driver.findElement(By.id("nb-option-" + (tipoDoc - 1)));
 				seleccionartipodoc.click();
 				//-----------------
 				buscartipodoc.click();
@@ -284,8 +294,9 @@ public class RealizarReservaWeb {
 	@And("crear reserva con los datos obtenidos en la web")
 	public void crearReservaWeb() throws Exception {
 		if (pasajeroEncontrado) {
+			//WebElement paginareserva = driver.findElement(By.id("paginareserva"));
 			WebElement paginareserva = driver.findElement(
-				By.id("paginareserva")
+				By.linkText("Registro de reserva")
 			);
 			paginareserva.click();
 			WebElement inputCrearNroReserva = driver.findElement(
